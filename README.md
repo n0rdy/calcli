@@ -1,6 +1,5 @@
 # CalCLI - a CLI calculator
 
-## Description
 A cross-platform CLI calculator app with a rich set of [features](#features).
 
 It is handy if you need to do some quick calculations while hacking in the terminal - no need to open a calculator app.
