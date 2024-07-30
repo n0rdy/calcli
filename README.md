@@ -30,6 +30,20 @@ Features:
   - `tan(x)` - the tangent of `x`
 - the result of the previous calculation is stored in the variable `$pr` and can be used in further calculations.
 
+## Table of contents
+* [Installation](#installation)
+  * [Prerequisites](#prerequisites)
+  * [Manual](#manual)
+  * [MacOS](#macos)
+  * [Linux](#macos)
+    * [via APT](#via-apt)
+      * [Prerequisites](#prerequisites-1)
+      * [Installation](#installation-1)
+    * [via YUM](#via-yum)
+      * [Prerequisites](#prerequisites-2)
+      * [Installation](#installation-2)
+* [Usage](#usage)
+
 ## Installation
 ### Prerequisites
 - [Go](https://golang.org/doc/install) (version 1.22 or higher) if you want to build the app from the source code.
@@ -45,8 +59,8 @@ brew install calcli
 ```
 
 ### Linux
-- via APT:
-#### Prerequisites
+#### via APT
+##### Prerequisites
 To enable, add the following file /etc/apt/sources.list.d/fury.list:
 ```text
 deb [trusted=yes] https://apt.fury.io/n0rdy/ /
@@ -67,13 +81,13 @@ echo "deb [trusted=yes] https://apt.fury.io/n0rdy/ /" > /etc/apt/sources.list.d/
 # click Ctrl+D to exit
 ```
 
-#### Installation
+##### Installation
 ```shell
 sudo apt update && sudo apt install calcli
 ```
 
-- via YUM:
-#### Prerequisites
+#### via YUM
+##### Prerequisites
 To enable, add the following file /etc/yum.repos.d/fury.repo:
 ```text
 [fury]
@@ -83,7 +97,7 @@ enabled=1
 gpgcheck=0
 ```
 
-#### Installation
+##### Installation
 ```shell
 sudo yum install calcli
 ```
