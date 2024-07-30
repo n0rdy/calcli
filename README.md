@@ -85,6 +85,8 @@ calcli
 This will start the app in the interactive mode.
 Type your expression and press Enter to get the result.
 
+Type `exit` to quit the app.
+
 ## Features
 - basic arithmetic operations: `+`, `-`, `*`, `/`, `%`, `^`, `!`, as well as parentheses
 - integer and floating-point numbers (`.` as a decimal separator)
