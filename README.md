@@ -1,34 +1,9 @@
-# Calcli - a CLI calculator
+# CalCLI - a CLI calculator
 
 ## Description
-A CLI calculator app.
+A cross-platform CLI calculator app with a rich set of [features](#features).
 
-Features:
-- basic arithmetic operations: `+`, `-`, `*`, `/`, `%`, `^`, `!`, as well as parentheses
-- integer and floating-point numbers (`.` as a decimal separator)
-- a set of predefined constants: `pi`, `e`
-- math functions:
-  - `abs(x)` - the absolute value of `x`
-  - `acos(x)` - the arccosine of `x`
-  - `asin(x)` - the arcsine of `x`
-  - `atan(x)` - the arctangent of `x`
-  - `ceil(x)` - the smallest integer value greater than or equal to `x`
-  - `cos(x)` - the cosine of `x`
-  - `exp(x)` - the value of `e^x`
-  - `exp2(x)` - the value of `2^x`
-  - `floor(x)` - the largest integer value less than or equal to `x`
-  - `ln(x)` - the natural logarithm of `x`
-  - `log(x, base)` - the logarithm of `x` to the specified `base`
-  - `log2(x)` - the base-2 logarithm of `x`
-  - `log10(x)` - the base-10 logarithm of `x`
-  - `mod(x, y)` - the remainder of the division of `x` by `y`
-  - `nrt(x, degree)` - the root of `x` of the specified `degree`
-  - `percent(x, y)` - the percentage of `x` from `y`
-  - `round(x)` - the value of `x` rounded to the nearest integer
-  - `sin(x)` - the sine of `x`
-  - `sqrt(x)` - the square root of `x`
-  - `tan(x)` - the tangent of `x`
-- the result of the previous calculation is stored in the variable `$pr` and can be used in further calculations.
+It is handy if you need to do some quick calculations while hacking in the terminal - no need to open a calculator app.
 
 ## Table of contents
 * [Installation](#installation)
@@ -43,6 +18,7 @@ Features:
       * [Prerequisites](#prerequisites-2)
       * [Installation](#installation-2)
 * [Usage](#usage)
+* [Features](#features)
 
 ## Installation
 ### Prerequisites
@@ -109,3 +85,32 @@ calcli
 
 This will start the app in the interactive mode.
 Type your expression and press Enter to get the result.
+
+## Features
+- basic arithmetic operations: `+`, `-`, `*`, `/`, `%`, `^`, `!`, as well as parentheses
+- integer and floating-point numbers (`.` as a decimal separator)
+- a set of predefined constants: `pi`, `e`
+- math functions:
+  - `abs(x)` - the absolute value of `x`
+  - `acos(x)` - the arccosine of `x`
+  - `asin(x)` - the arcsine of `x`
+  - `atan(x)` - the arctangent of `x`
+  - `ceil(x)` - the smallest integer value greater than or equal to `x`
+  - `cos(x)` - the cosine of `x`
+  - `exp(x)` - the value of `e^x`
+  - `exp2(x)` - the value of `2^x`
+  - `floor(x)` - the largest integer value less than or equal to `x`
+  - `ln(x)` - the natural logarithm of `x`
+  - `log(x, base)` - the logarithm of `x` to the specified `base`
+  - `log2(x)` - the base-2 logarithm of `x`
+  - `log10(x)` - the base-10 logarithm of `x`
+  - `mod(x, y)` - the remainder of the division of `x` by `y`
+  - `nrt(x, degree)` - the root of `x` of the specified `degree`
+  - `percent(x, y)` - the percentage of `x` from `y`
+  - `round(x)` - the value of `x` rounded to the nearest integer
+  - `sin(x)` - the sine of `x`
+  - `sqrt(x)` - the square root of `x`
+  - `tan(x)` - the tangent of `x`
+- the result of the previous calculation is stored in the variable `$pr` and can be used in further calculations.
+
+Have fun! =)
