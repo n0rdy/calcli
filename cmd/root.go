@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"math"
 	"n0rdy.foo/calcli/calc"
+	"n0rdy.foo/calcli/calc/parser"
 	"n0rdy.foo/calcli/calc/utils"
 	"os"
 
@@ -51,7 +52,7 @@ and can be used in subsequent calculations.
 Have fun =)`,
 	Version: "0.0.1",
 	Run: func(cmd *cobra.Command, args []string) {
-		c := calc.NewCalc()
+		c := calc.NewCalcProcessor()
 
 		for {
 			input := userInput()
@@ -62,30 +63,13 @@ Have fun =)`,
 				break
 			}
 
-			res, err := c.Calculate(input)
+			res, err := c.Process(input)
 			if err != nil {
 				fmt.Println(err)
 				fmt.Println()
 				continue
 			}
-			if math.IsNaN(res) {
-				fmt.Println("NaN")
-				fmt.Println()
-				continue
-			}
-			if math.IsInf(res, -1) {
-				fmt.Println("-∞")
-				fmt.Println()
-				continue
-			}
-			if math.IsInf(res, 1) {
-				fmt.Println("+∞")
-				fmt.Println()
-				continue
-			}
-
-			utils.PreviousResult = res
-			fmt.Println(res)
+			processResult(*res)
 			fmt.Println()
 		}
 	},
@@ -95,6 +79,29 @@ func userInput() string {
 	scanner := bufio.NewScanner(os.Stdin)
 	scanner.Scan()
 	return scanner.Text()
+}
+
+func processResult(res parser.CalcResult) {
+	if !res.HasValue {
+		return
+	}
+
+	val := res.Value
+	if math.IsNaN(val) {
+		fmt.Println("NaN")
+		return
+	}
+	if math.IsInf(val, -1) {
+		fmt.Println("-∞")
+		return
+	}
+	if math.IsInf(val, 1) {
+		fmt.Println("+∞")
+		return
+	}
+
+	utils.SetPreviousResult(val)
+	fmt.Println(val)
 }
 
 func Execute() {

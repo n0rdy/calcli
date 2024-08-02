@@ -34,121 +34,131 @@ func calcliParserInit() {
 	staticData := &CalcliParserStaticData
 	staticData.LiteralNames = []string{
 		"", "'abs'", "'acos'", "'asin'", "'atan'", "'ceil'", "','", "'cos'",
-		"'.'", "'e'", "'!'", "'exp'", "'exp2'", "", "", "'floor'", "'ln'", "'log'",
-		"'log2'", "'log10'", "'('", "'-'", "'mod'", "'nrt'", "'%'", "'percent'",
-		"'pi'", "'+'", "'^'", "'round'", "'$pr'", "')'", "'sin'", "'*'", "'/'",
-		"'sqrt'", "'tan'",
+		"'$'", "'.'", "'='", "'e'", "'!'", "'exp'", "'exp2'", "", "", "'floor'",
+		"'ln'", "'log'", "'log2'", "'log10'", "'('", "'-'", "'mod'", "'nrt'",
+		"'%'", "'percent'", "'pi'", "'+'", "'pmem'", "'^'", "'round'", "'$pr'",
+		"')'", "'sin'", "'*'", "'/'", "'sqrt'", "'tan'",
 	}
 	staticData.SymbolicNames = []string{
-		"", "ABS", "ACOS", "ASIN", "ATAN", "CEIL", "COMMA", "COS", "DOT", "EULER",
-		"EXCLAMATION", "EXP", "EXP2", "INT", "FLOAT", "FLOOR", "LN", "LOG",
-		"LOG2", "LOG10", "LPAREN", "MINUS", "MOD", "NRT", "PERCENT", "PERCENTAGE",
-		"PI", "PLUS", "POW", "ROUND", "PREVIOS", "RPAREN", "SIN", "STAR", "SLASH",
-		"SQRT", "TAN", "WS",
+		"", "ABS", "ACOS", "ASIN", "ATAN", "CEIL", "COMMA", "COS", "DOLLAR",
+		"DOT", "EQUAL", "EULER", "EXCLAMATION", "EXP", "EXP2", "INT", "FLOAT",
+		"FLOOR", "LN", "LOG", "LOG2", "LOG10", "LPAREN", "MINUS", "MOD", "NRT",
+		"PERCENT", "PERCENTAGE", "PI", "PLUS", "PMEM", "POW", "ROUND", "PREVIOS",
+		"RPAREN", "SIN", "STAR", "SLASH", "SQRT", "TAN", "VAR", "WS",
 	}
 	staticData.RuleNames = []string{
 		"unit", "constant", "number", "variable", "mathFunc", "absMathFunc",
 		"acosMathFunc", "asinMathFunc", "atanMathFunc", "ceilMathFunc", "cosMathFunc",
 		"expMathFunc", "exp2MathFunc", "floorMathFunc", "lnMathFunc", "logMathFunc",
 		"log2MathFunc", "log10MathFunc", "modMathFunc", "nrtMathFunc", "percentMathFunc",
-		"roundMathFunc", "sinMathFunc", "sqrtMathFunc", "tanMathFunc", "start",
-		"expr",
+		"roundMathFunc", "sinMathFunc", "sqrtMathFunc", "tanMathFunc", "sysFunc",
+		"printMemory", "start", "expr", "assign",
 	}
 	staticData.PredictionContextCache = antlr.NewPredictionContextCache()
 	staticData.serializedATN = []int32{
-		4, 1, 37, 226, 2, 0, 7, 0, 2, 1, 7, 1, 2, 2, 7, 2, 2, 3, 7, 3, 2, 4, 7,
+		4, 1, 41, 250, 2, 0, 7, 0, 2, 1, 7, 1, 2, 2, 7, 2, 2, 3, 7, 3, 2, 4, 7,
 		4, 2, 5, 7, 5, 2, 6, 7, 6, 2, 7, 7, 7, 2, 8, 7, 8, 2, 9, 7, 9, 2, 10, 7,
 		10, 2, 11, 7, 11, 2, 12, 7, 12, 2, 13, 7, 13, 2, 14, 7, 14, 2, 15, 7, 15,
 		2, 16, 7, 16, 2, 17, 7, 17, 2, 18, 7, 18, 2, 19, 7, 19, 2, 20, 7, 20, 2,
 		21, 7, 21, 2, 22, 7, 22, 2, 23, 7, 23, 2, 24, 7, 24, 2, 25, 7, 25, 2, 26,
-		7, 26, 1, 0, 1, 0, 1, 0, 3, 0, 58, 8, 0, 1, 1, 1, 1, 1, 2, 1, 2, 1, 3,
-		1, 3, 1, 4, 1, 4, 1, 4, 1, 4, 1, 4, 1, 4, 1, 4, 1, 4, 1, 4, 1, 4, 1, 4,
-		1, 4, 1, 4, 1, 4, 1, 4, 1, 4, 1, 4, 1, 4, 1, 4, 1, 4, 3, 4, 86, 8, 4, 1,
-		5, 1, 5, 1, 5, 1, 5, 1, 5, 1, 6, 1, 6, 1, 6, 1, 6, 1, 6, 1, 7, 1, 7, 1,
-		7, 1, 7, 1, 7, 1, 8, 1, 8, 1, 8, 1, 8, 1, 8, 1, 9, 1, 9, 1, 9, 1, 9, 1,
-		9, 1, 10, 1, 10, 1, 10, 1, 10, 1, 10, 1, 11, 1, 11, 1, 11, 1, 11, 1, 11,
-		1, 12, 1, 12, 1, 12, 1, 12, 1, 12, 1, 13, 1, 13, 1, 13, 1, 13, 1, 13, 1,
-		14, 1, 14, 1, 14, 1, 14, 1, 14, 1, 15, 1, 15, 1, 15, 1, 15, 1, 15, 1, 15,
-		1, 15, 1, 16, 1, 16, 1, 16, 1, 16, 1, 16, 1, 17, 1, 17, 1, 17, 1, 17, 1,
-		17, 1, 18, 1, 18, 1, 18, 1, 18, 1, 18, 1, 18, 1, 18, 1, 19, 1, 19, 1, 19,
-		1, 19, 1, 19, 1, 19, 1, 19, 1, 20, 1, 20, 1, 20, 1, 20, 1, 20, 1, 20, 1,
-		20, 1, 21, 1, 21, 1, 21, 1, 21, 1, 21, 1, 22, 1, 22, 1, 22, 1, 22, 1, 22,
-		1, 23, 1, 23, 1, 23, 1, 23, 1, 23, 1, 24, 1, 24, 1, 24, 1, 24, 1, 24, 1,
-		25, 1, 25, 1, 25, 1, 26, 1, 26, 1, 26, 1, 26, 1, 26, 1, 26, 1, 26, 1, 26,
-		1, 26, 3, 26, 208, 8, 26, 1, 26, 1, 26, 1, 26, 1, 26, 1, 26, 1, 26, 1,
-		26, 1, 26, 1, 26, 1, 26, 1, 26, 5, 26, 221, 8, 26, 10, 26, 12, 26, 224,
-		9, 26, 1, 26, 0, 1, 52, 27, 0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22,
-		24, 26, 28, 30, 32, 34, 36, 38, 40, 42, 44, 46, 48, 50, 52, 0, 4, 2, 0,
-		9, 9, 26, 26, 1, 0, 13, 14, 2, 0, 24, 24, 33, 34, 2, 0, 21, 21, 27, 27,
-		226, 0, 57, 1, 0, 0, 0, 2, 59, 1, 0, 0, 0, 4, 61, 1, 0, 0, 0, 6, 63, 1,
-		0, 0, 0, 8, 85, 1, 0, 0, 0, 10, 87, 1, 0, 0, 0, 12, 92, 1, 0, 0, 0, 14,
-		97, 1, 0, 0, 0, 16, 102, 1, 0, 0, 0, 18, 107, 1, 0, 0, 0, 20, 112, 1, 0,
-		0, 0, 22, 117, 1, 0, 0, 0, 24, 122, 1, 0, 0, 0, 26, 127, 1, 0, 0, 0, 28,
-		132, 1, 0, 0, 0, 30, 137, 1, 0, 0, 0, 32, 144, 1, 0, 0, 0, 34, 149, 1,
-		0, 0, 0, 36, 154, 1, 0, 0, 0, 38, 161, 1, 0, 0, 0, 40, 168, 1, 0, 0, 0,
-		42, 175, 1, 0, 0, 0, 44, 180, 1, 0, 0, 0, 46, 185, 1, 0, 0, 0, 48, 190,
-		1, 0, 0, 0, 50, 195, 1, 0, 0, 0, 52, 207, 1, 0, 0, 0, 54, 58, 3, 4, 2,
-		0, 55, 58, 3, 2, 1, 0, 56, 58, 3, 6, 3, 0, 57, 54, 1, 0, 0, 0, 57, 55,
-		1, 0, 0, 0, 57, 56, 1, 0, 0, 0, 58, 1, 1, 0, 0, 0, 59, 60, 7, 0, 0, 0,
-		60, 3, 1, 0, 0, 0, 61, 62, 7, 1, 0, 0, 62, 5, 1, 0, 0, 0, 63, 64, 5, 30,
-		0, 0, 64, 7, 1, 0, 0, 0, 65, 86, 3, 10, 5, 0, 66, 86, 3, 12, 6, 0, 67,
-		86, 3, 14, 7, 0, 68, 86, 3, 16, 8, 0, 69, 86, 3, 18, 9, 0, 70, 86, 3, 20,
-		10, 0, 71, 86, 3, 22, 11, 0, 72, 86, 3, 24, 12, 0, 73, 86, 3, 26, 13, 0,
-		74, 86, 3, 28, 14, 0, 75, 86, 3, 30, 15, 0, 76, 86, 3, 32, 16, 0, 77, 86,
-		3, 34, 17, 0, 78, 86, 3, 36, 18, 0, 79, 86, 3, 38, 19, 0, 80, 86, 3, 40,
-		20, 0, 81, 86, 3, 42, 21, 0, 82, 86, 3, 44, 22, 0, 83, 86, 3, 46, 23, 0,
-		84, 86, 3, 48, 24, 0, 85, 65, 1, 0, 0, 0, 85, 66, 1, 0, 0, 0, 85, 67, 1,
-		0, 0, 0, 85, 68, 1, 0, 0, 0, 85, 69, 1, 0, 0, 0, 85, 70, 1, 0, 0, 0, 85,
-		71, 1, 0, 0, 0, 85, 72, 1, 0, 0, 0, 85, 73, 1, 0, 0, 0, 85, 74, 1, 0, 0,
-		0, 85, 75, 1, 0, 0, 0, 85, 76, 1, 0, 0, 0, 85, 77, 1, 0, 0, 0, 85, 78,
-		1, 0, 0, 0, 85, 79, 1, 0, 0, 0, 85, 80, 1, 0, 0, 0, 85, 81, 1, 0, 0, 0,
-		85, 82, 1, 0, 0, 0, 85, 83, 1, 0, 0, 0, 85, 84, 1, 0, 0, 0, 86, 9, 1, 0,
-		0, 0, 87, 88, 5, 1, 0, 0, 88, 89, 5, 20, 0, 0, 89, 90, 3, 52, 26, 0, 90,
-		91, 5, 31, 0, 0, 91, 11, 1, 0, 0, 0, 92, 93, 5, 2, 0, 0, 93, 94, 5, 20,
-		0, 0, 94, 95, 3, 52, 26, 0, 95, 96, 5, 31, 0, 0, 96, 13, 1, 0, 0, 0, 97,
-		98, 5, 3, 0, 0, 98, 99, 5, 20, 0, 0, 99, 100, 3, 52, 26, 0, 100, 101, 5,
-		31, 0, 0, 101, 15, 1, 0, 0, 0, 102, 103, 5, 4, 0, 0, 103, 104, 5, 20, 0,
-		0, 104, 105, 3, 52, 26, 0, 105, 106, 5, 31, 0, 0, 106, 17, 1, 0, 0, 0,
-		107, 108, 5, 5, 0, 0, 108, 109, 5, 20, 0, 0, 109, 110, 3, 52, 26, 0, 110,
-		111, 5, 31, 0, 0, 111, 19, 1, 0, 0, 0, 112, 113, 5, 7, 0, 0, 113, 114,
-		5, 20, 0, 0, 114, 115, 3, 52, 26, 0, 115, 116, 5, 31, 0, 0, 116, 21, 1,
-		0, 0, 0, 117, 118, 5, 11, 0, 0, 118, 119, 5, 20, 0, 0, 119, 120, 3, 52,
-		26, 0, 120, 121, 5, 31, 0, 0, 121, 23, 1, 0, 0, 0, 122, 123, 5, 12, 0,
-		0, 123, 124, 5, 20, 0, 0, 124, 125, 3, 52, 26, 0, 125, 126, 5, 31, 0, 0,
-		126, 25, 1, 0, 0, 0, 127, 128, 5, 15, 0, 0, 128, 129, 5, 20, 0, 0, 129,
-		130, 3, 52, 26, 0, 130, 131, 5, 31, 0, 0, 131, 27, 1, 0, 0, 0, 132, 133,
-		5, 16, 0, 0, 133, 134, 5, 20, 0, 0, 134, 135, 3, 52, 26, 0, 135, 136, 5,
-		31, 0, 0, 136, 29, 1, 0, 0, 0, 137, 138, 5, 17, 0, 0, 138, 139, 5, 20,
-		0, 0, 139, 140, 3, 52, 26, 0, 140, 141, 5, 6, 0, 0, 141, 142, 3, 52, 26,
-		0, 142, 143, 5, 31, 0, 0, 143, 31, 1, 0, 0, 0, 144, 145, 5, 18, 0, 0, 145,
-		146, 5, 20, 0, 0, 146, 147, 3, 52, 26, 0, 147, 148, 5, 31, 0, 0, 148, 33,
-		1, 0, 0, 0, 149, 150, 5, 19, 0, 0, 150, 151, 5, 20, 0, 0, 151, 152, 3,
-		52, 26, 0, 152, 153, 5, 31, 0, 0, 153, 35, 1, 0, 0, 0, 154, 155, 5, 22,
-		0, 0, 155, 156, 5, 20, 0, 0, 156, 157, 3, 52, 26, 0, 157, 158, 5, 6, 0,
-		0, 158, 159, 3, 52, 26, 0, 159, 160, 5, 31, 0, 0, 160, 37, 1, 0, 0, 0,
-		161, 162, 5, 23, 0, 0, 162, 163, 5, 20, 0, 0, 163, 164, 3, 52, 26, 0, 164,
-		165, 5, 6, 0, 0, 165, 166, 3, 52, 26, 0, 166, 167, 5, 31, 0, 0, 167, 39,
-		1, 0, 0, 0, 168, 169, 5, 25, 0, 0, 169, 170, 5, 20, 0, 0, 170, 171, 3,
-		52, 26, 0, 171, 172, 5, 6, 0, 0, 172, 173, 3, 52, 26, 0, 173, 174, 5, 31,
-		0, 0, 174, 41, 1, 0, 0, 0, 175, 176, 5, 29, 0, 0, 176, 177, 5, 20, 0, 0,
-		177, 178, 3, 52, 26, 0, 178, 179, 5, 31, 0, 0, 179, 43, 1, 0, 0, 0, 180,
-		181, 5, 32, 0, 0, 181, 182, 5, 20, 0, 0, 182, 183, 3, 52, 26, 0, 183, 184,
-		5, 31, 0, 0, 184, 45, 1, 0, 0, 0, 185, 186, 5, 35, 0, 0, 186, 187, 5, 20,
-		0, 0, 187, 188, 3, 52, 26, 0, 188, 189, 5, 31, 0, 0, 189, 47, 1, 0, 0,
-		0, 190, 191, 5, 36, 0, 0, 191, 192, 5, 20, 0, 0, 192, 193, 3, 52, 26, 0,
-		193, 194, 5, 31, 0, 0, 194, 49, 1, 0, 0, 0, 195, 196, 3, 52, 26, 0, 196,
-		197, 5, 0, 0, 1, 197, 51, 1, 0, 0, 0, 198, 199, 6, 26, -1, 0, 199, 208,
-		3, 0, 0, 0, 200, 201, 5, 21, 0, 0, 201, 208, 3, 52, 26, 7, 202, 203, 5,
-		20, 0, 0, 203, 204, 3, 52, 26, 0, 204, 205, 5, 31, 0, 0, 205, 208, 1, 0,
-		0, 0, 206, 208, 3, 8, 4, 0, 207, 198, 1, 0, 0, 0, 207, 200, 1, 0, 0, 0,
-		207, 202, 1, 0, 0, 0, 207, 206, 1, 0, 0, 0, 208, 222, 1, 0, 0, 0, 209,
-		210, 10, 3, 0, 0, 210, 211, 5, 28, 0, 0, 211, 221, 3, 52, 26, 4, 212, 213,
-		10, 2, 0, 0, 213, 214, 7, 2, 0, 0, 214, 221, 3, 52, 26, 3, 215, 216, 10,
-		1, 0, 0, 216, 217, 7, 3, 0, 0, 217, 221, 3, 52, 26, 2, 218, 219, 10, 4,
-		0, 0, 219, 221, 5, 10, 0, 0, 220, 209, 1, 0, 0, 0, 220, 212, 1, 0, 0, 0,
-		220, 215, 1, 0, 0, 0, 220, 218, 1, 0, 0, 0, 221, 224, 1, 0, 0, 0, 222,
-		220, 1, 0, 0, 0, 222, 223, 1, 0, 0, 0, 223, 53, 1, 0, 0, 0, 224, 222, 1,
-		0, 0, 0, 5, 57, 85, 207, 220, 222,
+		7, 26, 2, 27, 7, 27, 2, 28, 7, 28, 2, 29, 7, 29, 1, 0, 1, 0, 1, 0, 3, 0,
+		64, 8, 0, 1, 1, 1, 1, 1, 2, 1, 2, 1, 3, 1, 3, 1, 4, 1, 4, 1, 4, 1, 4, 1,
+		4, 1, 4, 1, 4, 1, 4, 1, 4, 1, 4, 1, 4, 1, 4, 1, 4, 1, 4, 1, 4, 1, 4, 1,
+		4, 1, 4, 1, 4, 1, 4, 3, 4, 92, 8, 4, 1, 5, 1, 5, 1, 5, 1, 5, 1, 5, 1, 6,
+		1, 6, 1, 6, 1, 6, 1, 6, 1, 7, 1, 7, 1, 7, 1, 7, 1, 7, 1, 8, 1, 8, 1, 8,
+		1, 8, 1, 8, 1, 9, 1, 9, 1, 9, 1, 9, 1, 9, 1, 10, 1, 10, 1, 10, 1, 10, 1,
+		10, 1, 11, 1, 11, 1, 11, 1, 11, 1, 11, 1, 12, 1, 12, 1, 12, 1, 12, 1, 12,
+		1, 13, 1, 13, 1, 13, 1, 13, 1, 13, 1, 14, 1, 14, 1, 14, 1, 14, 1, 14, 1,
+		15, 1, 15, 1, 15, 1, 15, 1, 15, 1, 15, 1, 15, 1, 16, 1, 16, 1, 16, 1, 16,
+		1, 16, 1, 17, 1, 17, 1, 17, 1, 17, 1, 17, 1, 18, 1, 18, 1, 18, 1, 18, 1,
+		18, 1, 18, 1, 18, 1, 19, 1, 19, 1, 19, 1, 19, 1, 19, 1, 19, 1, 19, 1, 20,
+		1, 20, 1, 20, 1, 20, 1, 20, 1, 20, 1, 20, 1, 21, 1, 21, 1, 21, 1, 21, 1,
+		21, 1, 22, 1, 22, 1, 22, 1, 22, 1, 22, 1, 23, 1, 23, 1, 23, 1, 23, 1, 23,
+		1, 24, 1, 24, 1, 24, 1, 24, 1, 24, 1, 25, 1, 25, 1, 26, 1, 26, 1, 26, 1,
+		26, 1, 27, 1, 27, 1, 27, 1, 27, 1, 27, 1, 27, 1, 27, 1, 27, 1, 27, 3, 27,
+		217, 8, 27, 1, 28, 1, 28, 1, 28, 1, 28, 1, 28, 1, 28, 1, 28, 1, 28, 1,
+		28, 3, 28, 228, 8, 28, 1, 28, 1, 28, 1, 28, 1, 28, 1, 28, 1, 28, 1, 28,
+		1, 28, 1, 28, 1, 28, 1, 28, 5, 28, 241, 8, 28, 10, 28, 12, 28, 244, 9,
+		28, 1, 29, 1, 29, 1, 29, 1, 29, 1, 29, 0, 1, 56, 30, 0, 2, 4, 6, 8, 10,
+		12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32, 34, 36, 38, 40, 42, 44, 46,
+		48, 50, 52, 54, 56, 58, 0, 5, 2, 0, 11, 11, 28, 28, 1, 0, 15, 16, 2, 0,
+		33, 33, 40, 40, 2, 0, 26, 26, 36, 37, 2, 0, 23, 23, 29, 29, 249, 0, 63,
+		1, 0, 0, 0, 2, 65, 1, 0, 0, 0, 4, 67, 1, 0, 0, 0, 6, 69, 1, 0, 0, 0, 8,
+		91, 1, 0, 0, 0, 10, 93, 1, 0, 0, 0, 12, 98, 1, 0, 0, 0, 14, 103, 1, 0,
+		0, 0, 16, 108, 1, 0, 0, 0, 18, 113, 1, 0, 0, 0, 20, 118, 1, 0, 0, 0, 22,
+		123, 1, 0, 0, 0, 24, 128, 1, 0, 0, 0, 26, 133, 1, 0, 0, 0, 28, 138, 1,
+		0, 0, 0, 30, 143, 1, 0, 0, 0, 32, 150, 1, 0, 0, 0, 34, 155, 1, 0, 0, 0,
+		36, 160, 1, 0, 0, 0, 38, 167, 1, 0, 0, 0, 40, 174, 1, 0, 0, 0, 42, 181,
+		1, 0, 0, 0, 44, 186, 1, 0, 0, 0, 46, 191, 1, 0, 0, 0, 48, 196, 1, 0, 0,
+		0, 50, 201, 1, 0, 0, 0, 52, 203, 1, 0, 0, 0, 54, 216, 1, 0, 0, 0, 56, 227,
+		1, 0, 0, 0, 58, 245, 1, 0, 0, 0, 60, 64, 3, 4, 2, 0, 61, 64, 3, 2, 1, 0,
+		62, 64, 3, 6, 3, 0, 63, 60, 1, 0, 0, 0, 63, 61, 1, 0, 0, 0, 63, 62, 1,
+		0, 0, 0, 64, 1, 1, 0, 0, 0, 65, 66, 7, 0, 0, 0, 66, 3, 1, 0, 0, 0, 67,
+		68, 7, 1, 0, 0, 68, 5, 1, 0, 0, 0, 69, 70, 7, 2, 0, 0, 70, 7, 1, 0, 0,
+		0, 71, 92, 3, 10, 5, 0, 72, 92, 3, 12, 6, 0, 73, 92, 3, 14, 7, 0, 74, 92,
+		3, 16, 8, 0, 75, 92, 3, 18, 9, 0, 76, 92, 3, 20, 10, 0, 77, 92, 3, 22,
+		11, 0, 78, 92, 3, 24, 12, 0, 79, 92, 3, 26, 13, 0, 80, 92, 3, 28, 14, 0,
+		81, 92, 3, 30, 15, 0, 82, 92, 3, 32, 16, 0, 83, 92, 3, 34, 17, 0, 84, 92,
+		3, 36, 18, 0, 85, 92, 3, 38, 19, 0, 86, 92, 3, 40, 20, 0, 87, 92, 3, 42,
+		21, 0, 88, 92, 3, 44, 22, 0, 89, 92, 3, 46, 23, 0, 90, 92, 3, 48, 24, 0,
+		91, 71, 1, 0, 0, 0, 91, 72, 1, 0, 0, 0, 91, 73, 1, 0, 0, 0, 91, 74, 1,
+		0, 0, 0, 91, 75, 1, 0, 0, 0, 91, 76, 1, 0, 0, 0, 91, 77, 1, 0, 0, 0, 91,
+		78, 1, 0, 0, 0, 91, 79, 1, 0, 0, 0, 91, 80, 1, 0, 0, 0, 91, 81, 1, 0, 0,
+		0, 91, 82, 1, 0, 0, 0, 91, 83, 1, 0, 0, 0, 91, 84, 1, 0, 0, 0, 91, 85,
+		1, 0, 0, 0, 91, 86, 1, 0, 0, 0, 91, 87, 1, 0, 0, 0, 91, 88, 1, 0, 0, 0,
+		91, 89, 1, 0, 0, 0, 91, 90, 1, 0, 0, 0, 92, 9, 1, 0, 0, 0, 93, 94, 5, 1,
+		0, 0, 94, 95, 5, 22, 0, 0, 95, 96, 3, 56, 28, 0, 96, 97, 5, 34, 0, 0, 97,
+		11, 1, 0, 0, 0, 98, 99, 5, 2, 0, 0, 99, 100, 5, 22, 0, 0, 100, 101, 3,
+		56, 28, 0, 101, 102, 5, 34, 0, 0, 102, 13, 1, 0, 0, 0, 103, 104, 5, 3,
+		0, 0, 104, 105, 5, 22, 0, 0, 105, 106, 3, 56, 28, 0, 106, 107, 5, 34, 0,
+		0, 107, 15, 1, 0, 0, 0, 108, 109, 5, 4, 0, 0, 109, 110, 5, 22, 0, 0, 110,
+		111, 3, 56, 28, 0, 111, 112, 5, 34, 0, 0, 112, 17, 1, 0, 0, 0, 113, 114,
+		5, 5, 0, 0, 114, 115, 5, 22, 0, 0, 115, 116, 3, 56, 28, 0, 116, 117, 5,
+		34, 0, 0, 117, 19, 1, 0, 0, 0, 118, 119, 5, 7, 0, 0, 119, 120, 5, 22, 0,
+		0, 120, 121, 3, 56, 28, 0, 121, 122, 5, 34, 0, 0, 122, 21, 1, 0, 0, 0,
+		123, 124, 5, 13, 0, 0, 124, 125, 5, 22, 0, 0, 125, 126, 3, 56, 28, 0, 126,
+		127, 5, 34, 0, 0, 127, 23, 1, 0, 0, 0, 128, 129, 5, 14, 0, 0, 129, 130,
+		5, 22, 0, 0, 130, 131, 3, 56, 28, 0, 131, 132, 5, 34, 0, 0, 132, 25, 1,
+		0, 0, 0, 133, 134, 5, 17, 0, 0, 134, 135, 5, 22, 0, 0, 135, 136, 3, 56,
+		28, 0, 136, 137, 5, 34, 0, 0, 137, 27, 1, 0, 0, 0, 138, 139, 5, 18, 0,
+		0, 139, 140, 5, 22, 0, 0, 140, 141, 3, 56, 28, 0, 141, 142, 5, 34, 0, 0,
+		142, 29, 1, 0, 0, 0, 143, 144, 5, 19, 0, 0, 144, 145, 5, 22, 0, 0, 145,
+		146, 3, 56, 28, 0, 146, 147, 5, 6, 0, 0, 147, 148, 3, 56, 28, 0, 148, 149,
+		5, 34, 0, 0, 149, 31, 1, 0, 0, 0, 150, 151, 5, 20, 0, 0, 151, 152, 5, 22,
+		0, 0, 152, 153, 3, 56, 28, 0, 153, 154, 5, 34, 0, 0, 154, 33, 1, 0, 0,
+		0, 155, 156, 5, 21, 0, 0, 156, 157, 5, 22, 0, 0, 157, 158, 3, 56, 28, 0,
+		158, 159, 5, 34, 0, 0, 159, 35, 1, 0, 0, 0, 160, 161, 5, 24, 0, 0, 161,
+		162, 5, 22, 0, 0, 162, 163, 3, 56, 28, 0, 163, 164, 5, 6, 0, 0, 164, 165,
+		3, 56, 28, 0, 165, 166, 5, 34, 0, 0, 166, 37, 1, 0, 0, 0, 167, 168, 5,
+		25, 0, 0, 168, 169, 5, 22, 0, 0, 169, 170, 3, 56, 28, 0, 170, 171, 5, 6,
+		0, 0, 171, 172, 3, 56, 28, 0, 172, 173, 5, 34, 0, 0, 173, 39, 1, 0, 0,
+		0, 174, 175, 5, 27, 0, 0, 175, 176, 5, 22, 0, 0, 176, 177, 3, 56, 28, 0,
+		177, 178, 5, 6, 0, 0, 178, 179, 3, 56, 28, 0, 179, 180, 5, 34, 0, 0, 180,
+		41, 1, 0, 0, 0, 181, 182, 5, 32, 0, 0, 182, 183, 5, 22, 0, 0, 183, 184,
+		3, 56, 28, 0, 184, 185, 5, 34, 0, 0, 185, 43, 1, 0, 0, 0, 186, 187, 5,
+		35, 0, 0, 187, 188, 5, 22, 0, 0, 188, 189, 3, 56, 28, 0, 189, 190, 5, 34,
+		0, 0, 190, 45, 1, 0, 0, 0, 191, 192, 5, 38, 0, 0, 192, 193, 5, 22, 0, 0,
+		193, 194, 3, 56, 28, 0, 194, 195, 5, 34, 0, 0, 195, 47, 1, 0, 0, 0, 196,
+		197, 5, 39, 0, 0, 197, 198, 5, 22, 0, 0, 198, 199, 3, 56, 28, 0, 199, 200,
+		5, 34, 0, 0, 200, 49, 1, 0, 0, 0, 201, 202, 3, 52, 26, 0, 202, 51, 1, 0,
+		0, 0, 203, 204, 5, 30, 0, 0, 204, 205, 5, 22, 0, 0, 205, 206, 5, 34, 0,
+		0, 206, 53, 1, 0, 0, 0, 207, 208, 3, 56, 28, 0, 208, 209, 5, 0, 0, 1, 209,
+		217, 1, 0, 0, 0, 210, 211, 3, 58, 29, 0, 211, 212, 5, 0, 0, 1, 212, 217,
+		1, 0, 0, 0, 213, 214, 3, 50, 25, 0, 214, 215, 5, 0, 0, 1, 215, 217, 1,
+		0, 0, 0, 216, 207, 1, 0, 0, 0, 216, 210, 1, 0, 0, 0, 216, 213, 1, 0, 0,
+		0, 217, 55, 1, 0, 0, 0, 218, 219, 6, 28, -1, 0, 219, 228, 3, 0, 0, 0, 220,
+		221, 5, 23, 0, 0, 221, 228, 3, 56, 28, 7, 222, 223, 5, 22, 0, 0, 223, 224,
+		3, 56, 28, 0, 224, 225, 5, 34, 0, 0, 225, 228, 1, 0, 0, 0, 226, 228, 3,
+		8, 4, 0, 227, 218, 1, 0, 0, 0, 227, 220, 1, 0, 0, 0, 227, 222, 1, 0, 0,
+		0, 227, 226, 1, 0, 0, 0, 228, 242, 1, 0, 0, 0, 229, 230, 10, 3, 0, 0, 230,
+		231, 5, 31, 0, 0, 231, 241, 3, 56, 28, 4, 232, 233, 10, 2, 0, 0, 233, 234,
+		7, 3, 0, 0, 234, 241, 3, 56, 28, 3, 235, 236, 10, 1, 0, 0, 236, 237, 7,
+		4, 0, 0, 237, 241, 3, 56, 28, 2, 238, 239, 10, 4, 0, 0, 239, 241, 5, 12,
+		0, 0, 240, 229, 1, 0, 0, 0, 240, 232, 1, 0, 0, 0, 240, 235, 1, 0, 0, 0,
+		240, 238, 1, 0, 0, 0, 241, 244, 1, 0, 0, 0, 242, 240, 1, 0, 0, 0, 242,
+		243, 1, 0, 0, 0, 243, 57, 1, 0, 0, 0, 244, 242, 1, 0, 0, 0, 245, 246, 5,
+		40, 0, 0, 246, 247, 5, 10, 0, 0, 247, 248, 3, 56, 28, 0, 248, 59, 1, 0,
+		0, 0, 6, 63, 91, 216, 227, 240, 242,
 	}
 	deserializer := antlr.NewATNDeserializer(nil)
 	staticData.atn = deserializer.Deserialize(staticData.serializedATN)
@@ -194,36 +204,40 @@ const (
 	CalcliParserCEIL        = 5
 	CalcliParserCOMMA       = 6
 	CalcliParserCOS         = 7
-	CalcliParserDOT         = 8
-	CalcliParserEULER       = 9
-	CalcliParserEXCLAMATION = 10
-	CalcliParserEXP         = 11
-	CalcliParserEXP2        = 12
-	CalcliParserINT         = 13
-	CalcliParserFLOAT       = 14
-	CalcliParserFLOOR       = 15
-	CalcliParserLN          = 16
-	CalcliParserLOG         = 17
-	CalcliParserLOG2        = 18
-	CalcliParserLOG10       = 19
-	CalcliParserLPAREN      = 20
-	CalcliParserMINUS       = 21
-	CalcliParserMOD         = 22
-	CalcliParserNRT         = 23
-	CalcliParserPERCENT     = 24
-	CalcliParserPERCENTAGE  = 25
-	CalcliParserPI          = 26
-	CalcliParserPLUS        = 27
-	CalcliParserPOW         = 28
-	CalcliParserROUND       = 29
-	CalcliParserPREVIOS     = 30
-	CalcliParserRPAREN      = 31
-	CalcliParserSIN         = 32
-	CalcliParserSTAR        = 33
-	CalcliParserSLASH       = 34
-	CalcliParserSQRT        = 35
-	CalcliParserTAN         = 36
-	CalcliParserWS          = 37
+	CalcliParserDOLLAR      = 8
+	CalcliParserDOT         = 9
+	CalcliParserEQUAL       = 10
+	CalcliParserEULER       = 11
+	CalcliParserEXCLAMATION = 12
+	CalcliParserEXP         = 13
+	CalcliParserEXP2        = 14
+	CalcliParserINT         = 15
+	CalcliParserFLOAT       = 16
+	CalcliParserFLOOR       = 17
+	CalcliParserLN          = 18
+	CalcliParserLOG         = 19
+	CalcliParserLOG2        = 20
+	CalcliParserLOG10       = 21
+	CalcliParserLPAREN      = 22
+	CalcliParserMINUS       = 23
+	CalcliParserMOD         = 24
+	CalcliParserNRT         = 25
+	CalcliParserPERCENT     = 26
+	CalcliParserPERCENTAGE  = 27
+	CalcliParserPI          = 28
+	CalcliParserPLUS        = 29
+	CalcliParserPMEM        = 30
+	CalcliParserPOW         = 31
+	CalcliParserROUND       = 32
+	CalcliParserPREVIOS     = 33
+	CalcliParserRPAREN      = 34
+	CalcliParserSIN         = 35
+	CalcliParserSTAR        = 36
+	CalcliParserSLASH       = 37
+	CalcliParserSQRT        = 38
+	CalcliParserTAN         = 39
+	CalcliParserVAR         = 40
+	CalcliParserWS          = 41
 )
 
 // CalcliParser rules.
@@ -253,8 +267,11 @@ const (
 	CalcliParserRULE_sinMathFunc     = 22
 	CalcliParserRULE_sqrtMathFunc    = 23
 	CalcliParserRULE_tanMathFunc     = 24
-	CalcliParserRULE_start           = 25
-	CalcliParserRULE_expr            = 26
+	CalcliParserRULE_sysFunc         = 25
+	CalcliParserRULE_printMemory     = 26
+	CalcliParserRULE_start           = 27
+	CalcliParserRULE_expr            = 28
+	CalcliParserRULE_assign          = 29
 )
 
 // IUnitContext is an interface to support dynamic dispatch.
@@ -376,7 +393,7 @@ func (s *UnitContext) ExitRule(listener antlr.ParseTreeListener) {
 func (p *CalcliParser) Unit() (localctx IUnitContext) {
 	localctx = NewUnitContext(p, p.GetParserRuleContext(), p.GetState())
 	p.EnterRule(localctx, 0, CalcliParserRULE_unit)
-	p.SetState(57)
+	p.SetState(63)
 	p.GetErrorHandler().Sync(p)
 	if p.HasError() {
 		goto errorExit
@@ -386,21 +403,21 @@ func (p *CalcliParser) Unit() (localctx IUnitContext) {
 	case CalcliParserINT, CalcliParserFLOAT:
 		p.EnterOuterAlt(localctx, 1)
 		{
-			p.SetState(54)
+			p.SetState(60)
 			p.Number()
 		}
 
 	case CalcliParserEULER, CalcliParserPI:
 		p.EnterOuterAlt(localctx, 2)
 		{
-			p.SetState(55)
+			p.SetState(61)
 			p.Constant()
 		}
 
-	case CalcliParserPREVIOS:
+	case CalcliParserPREVIOS, CalcliParserVAR:
 		p.EnterOuterAlt(localctx, 3)
 		{
-			p.SetState(56)
+			p.SetState(62)
 			p.Variable()
 		}
 
@@ -504,7 +521,7 @@ func (p *CalcliParser) Constant() (localctx IConstantContext) {
 
 	p.EnterOuterAlt(localctx, 1)
 	{
-		p.SetState(59)
+		p.SetState(65)
 		_la = p.GetTokenStream().LA(1)
 
 		if !(_la == CalcliParserEULER || _la == CalcliParserPI) {
@@ -610,7 +627,7 @@ func (p *CalcliParser) Number() (localctx INumberContext) {
 
 	p.EnterOuterAlt(localctx, 1)
 	{
-		p.SetState(61)
+		p.SetState(67)
 		_la = p.GetTokenStream().LA(1)
 
 		if !(_la == CalcliParserINT || _la == CalcliParserFLOAT) {
@@ -643,6 +660,7 @@ type IVariableContext interface {
 
 	// Getter signatures
 	PREVIOS() antlr.TerminalNode
+	VAR() antlr.TerminalNode
 
 	// IsVariableContext differentiates from other interfaces.
 	IsVariableContext()
@@ -684,6 +702,10 @@ func (s *VariableContext) PREVIOS() antlr.TerminalNode {
 	return s.GetToken(CalcliParserPREVIOS, 0)
 }
 
+func (s *VariableContext) VAR() antlr.TerminalNode {
+	return s.GetToken(CalcliParserVAR, 0)
+}
+
 func (s *VariableContext) GetRuleContext() antlr.RuleContext {
 	return s
 }
@@ -707,13 +729,18 @@ func (s *VariableContext) ExitRule(listener antlr.ParseTreeListener) {
 func (p *CalcliParser) Variable() (localctx IVariableContext) {
 	localctx = NewVariableContext(p, p.GetParserRuleContext(), p.GetState())
 	p.EnterRule(localctx, 6, CalcliParserRULE_variable)
+	var _la int
+
 	p.EnterOuterAlt(localctx, 1)
 	{
-		p.SetState(63)
-		p.Match(CalcliParserPREVIOS)
-		if p.HasError() {
-			// Recognition error - abort rule
-			goto errorExit
+		p.SetState(69)
+		_la = p.GetTokenStream().LA(1)
+
+		if !(_la == CalcliParserPREVIOS || _la == CalcliParserVAR) {
+			p.GetErrorHandler().RecoverInline(p)
+		} else {
+			p.GetErrorHandler().ReportMatch(p)
+			p.Consume()
 		}
 	}
 
@@ -1138,7 +1165,7 @@ func (s *MathFuncContext) ExitRule(listener antlr.ParseTreeListener) {
 func (p *CalcliParser) MathFunc() (localctx IMathFuncContext) {
 	localctx = NewMathFuncContext(p, p.GetParserRuleContext(), p.GetState())
 	p.EnterRule(localctx, 8, CalcliParserRULE_mathFunc)
-	p.SetState(85)
+	p.SetState(91)
 	p.GetErrorHandler().Sync(p)
 	if p.HasError() {
 		goto errorExit
@@ -1148,140 +1175,140 @@ func (p *CalcliParser) MathFunc() (localctx IMathFuncContext) {
 	case CalcliParserABS:
 		p.EnterOuterAlt(localctx, 1)
 		{
-			p.SetState(65)
+			p.SetState(71)
 			p.AbsMathFunc()
 		}
 
 	case CalcliParserACOS:
 		p.EnterOuterAlt(localctx, 2)
 		{
-			p.SetState(66)
+			p.SetState(72)
 			p.AcosMathFunc()
 		}
 
 	case CalcliParserASIN:
 		p.EnterOuterAlt(localctx, 3)
 		{
-			p.SetState(67)
+			p.SetState(73)
 			p.AsinMathFunc()
 		}
 
 	case CalcliParserATAN:
 		p.EnterOuterAlt(localctx, 4)
 		{
-			p.SetState(68)
+			p.SetState(74)
 			p.AtanMathFunc()
 		}
 
 	case CalcliParserCEIL:
 		p.EnterOuterAlt(localctx, 5)
 		{
-			p.SetState(69)
+			p.SetState(75)
 			p.CeilMathFunc()
 		}
 
 	case CalcliParserCOS:
 		p.EnterOuterAlt(localctx, 6)
 		{
-			p.SetState(70)
+			p.SetState(76)
 			p.CosMathFunc()
 		}
 
 	case CalcliParserEXP:
 		p.EnterOuterAlt(localctx, 7)
 		{
-			p.SetState(71)
+			p.SetState(77)
 			p.ExpMathFunc()
 		}
 
 	case CalcliParserEXP2:
 		p.EnterOuterAlt(localctx, 8)
 		{
-			p.SetState(72)
+			p.SetState(78)
 			p.Exp2MathFunc()
 		}
 
 	case CalcliParserFLOOR:
 		p.EnterOuterAlt(localctx, 9)
 		{
-			p.SetState(73)
+			p.SetState(79)
 			p.FloorMathFunc()
 		}
 
 	case CalcliParserLN:
 		p.EnterOuterAlt(localctx, 10)
 		{
-			p.SetState(74)
+			p.SetState(80)
 			p.LnMathFunc()
 		}
 
 	case CalcliParserLOG:
 		p.EnterOuterAlt(localctx, 11)
 		{
-			p.SetState(75)
+			p.SetState(81)
 			p.LogMathFunc()
 		}
 
 	case CalcliParserLOG2:
 		p.EnterOuterAlt(localctx, 12)
 		{
-			p.SetState(76)
+			p.SetState(82)
 			p.Log2MathFunc()
 		}
 
 	case CalcliParserLOG10:
 		p.EnterOuterAlt(localctx, 13)
 		{
-			p.SetState(77)
+			p.SetState(83)
 			p.Log10MathFunc()
 		}
 
 	case CalcliParserMOD:
 		p.EnterOuterAlt(localctx, 14)
 		{
-			p.SetState(78)
+			p.SetState(84)
 			p.ModMathFunc()
 		}
 
 	case CalcliParserNRT:
 		p.EnterOuterAlt(localctx, 15)
 		{
-			p.SetState(79)
+			p.SetState(85)
 			p.NrtMathFunc()
 		}
 
 	case CalcliParserPERCENTAGE:
 		p.EnterOuterAlt(localctx, 16)
 		{
-			p.SetState(80)
+			p.SetState(86)
 			p.PercentMathFunc()
 		}
 
 	case CalcliParserROUND:
 		p.EnterOuterAlt(localctx, 17)
 		{
-			p.SetState(81)
+			p.SetState(87)
 			p.RoundMathFunc()
 		}
 
 	case CalcliParserSIN:
 		p.EnterOuterAlt(localctx, 18)
 		{
-			p.SetState(82)
+			p.SetState(88)
 			p.SinMathFunc()
 		}
 
 	case CalcliParserSQRT:
 		p.EnterOuterAlt(localctx, 19)
 		{
-			p.SetState(83)
+			p.SetState(89)
 			p.SqrtMathFunc()
 		}
 
 	case CalcliParserTAN:
 		p.EnterOuterAlt(localctx, 20)
 		{
-			p.SetState(84)
+			p.SetState(90)
 			p.TanMathFunc()
 		}
 
@@ -1416,7 +1443,7 @@ func (p *CalcliParser) AbsMathFunc() (localctx IAbsMathFuncContext) {
 	p.EnterRule(localctx, 10, CalcliParserRULE_absMathFunc)
 	p.EnterOuterAlt(localctx, 1)
 	{
-		p.SetState(87)
+		p.SetState(93)
 		p.Match(CalcliParserABS)
 		if p.HasError() {
 			// Recognition error - abort rule
@@ -1424,7 +1451,7 @@ func (p *CalcliParser) AbsMathFunc() (localctx IAbsMathFuncContext) {
 		}
 	}
 	{
-		p.SetState(88)
+		p.SetState(94)
 		p.Match(CalcliParserLPAREN)
 		if p.HasError() {
 			// Recognition error - abort rule
@@ -1432,14 +1459,14 @@ func (p *CalcliParser) AbsMathFunc() (localctx IAbsMathFuncContext) {
 		}
 	}
 	{
-		p.SetState(89)
+		p.SetState(95)
 
 		var _x = p.expr(0)
 
 		localctx.(*AbsMathFuncContext).num = _x
 	}
 	{
-		p.SetState(90)
+		p.SetState(96)
 		p.Match(CalcliParserRPAREN)
 		if p.HasError() {
 			// Recognition error - abort rule
@@ -1573,7 +1600,7 @@ func (p *CalcliParser) AcosMathFunc() (localctx IAcosMathFuncContext) {
 	p.EnterRule(localctx, 12, CalcliParserRULE_acosMathFunc)
 	p.EnterOuterAlt(localctx, 1)
 	{
-		p.SetState(92)
+		p.SetState(98)
 		p.Match(CalcliParserACOS)
 		if p.HasError() {
 			// Recognition error - abort rule
@@ -1581,7 +1608,7 @@ func (p *CalcliParser) AcosMathFunc() (localctx IAcosMathFuncContext) {
 		}
 	}
 	{
-		p.SetState(93)
+		p.SetState(99)
 		p.Match(CalcliParserLPAREN)
 		if p.HasError() {
 			// Recognition error - abort rule
@@ -1589,14 +1616,14 @@ func (p *CalcliParser) AcosMathFunc() (localctx IAcosMathFuncContext) {
 		}
 	}
 	{
-		p.SetState(94)
+		p.SetState(100)
 
 		var _x = p.expr(0)
 
 		localctx.(*AcosMathFuncContext).num = _x
 	}
 	{
-		p.SetState(95)
+		p.SetState(101)
 		p.Match(CalcliParserRPAREN)
 		if p.HasError() {
 			// Recognition error - abort rule
@@ -1730,7 +1757,7 @@ func (p *CalcliParser) AsinMathFunc() (localctx IAsinMathFuncContext) {
 	p.EnterRule(localctx, 14, CalcliParserRULE_asinMathFunc)
 	p.EnterOuterAlt(localctx, 1)
 	{
-		p.SetState(97)
+		p.SetState(103)
 		p.Match(CalcliParserASIN)
 		if p.HasError() {
 			// Recognition error - abort rule
@@ -1738,7 +1765,7 @@ func (p *CalcliParser) AsinMathFunc() (localctx IAsinMathFuncContext) {
 		}
 	}
 	{
-		p.SetState(98)
+		p.SetState(104)
 		p.Match(CalcliParserLPAREN)
 		if p.HasError() {
 			// Recognition error - abort rule
@@ -1746,14 +1773,14 @@ func (p *CalcliParser) AsinMathFunc() (localctx IAsinMathFuncContext) {
 		}
 	}
 	{
-		p.SetState(99)
+		p.SetState(105)
 
 		var _x = p.expr(0)
 
 		localctx.(*AsinMathFuncContext).num = _x
 	}
 	{
-		p.SetState(100)
+		p.SetState(106)
 		p.Match(CalcliParserRPAREN)
 		if p.HasError() {
 			// Recognition error - abort rule
@@ -1887,7 +1914,7 @@ func (p *CalcliParser) AtanMathFunc() (localctx IAtanMathFuncContext) {
 	p.EnterRule(localctx, 16, CalcliParserRULE_atanMathFunc)
 	p.EnterOuterAlt(localctx, 1)
 	{
-		p.SetState(102)
+		p.SetState(108)
 		p.Match(CalcliParserATAN)
 		if p.HasError() {
 			// Recognition error - abort rule
@@ -1895,7 +1922,7 @@ func (p *CalcliParser) AtanMathFunc() (localctx IAtanMathFuncContext) {
 		}
 	}
 	{
-		p.SetState(103)
+		p.SetState(109)
 		p.Match(CalcliParserLPAREN)
 		if p.HasError() {
 			// Recognition error - abort rule
@@ -1903,14 +1930,14 @@ func (p *CalcliParser) AtanMathFunc() (localctx IAtanMathFuncContext) {
 		}
 	}
 	{
-		p.SetState(104)
+		p.SetState(110)
 
 		var _x = p.expr(0)
 
 		localctx.(*AtanMathFuncContext).num = _x
 	}
 	{
-		p.SetState(105)
+		p.SetState(111)
 		p.Match(CalcliParserRPAREN)
 		if p.HasError() {
 			// Recognition error - abort rule
@@ -2044,7 +2071,7 @@ func (p *CalcliParser) CeilMathFunc() (localctx ICeilMathFuncContext) {
 	p.EnterRule(localctx, 18, CalcliParserRULE_ceilMathFunc)
 	p.EnterOuterAlt(localctx, 1)
 	{
-		p.SetState(107)
+		p.SetState(113)
 		p.Match(CalcliParserCEIL)
 		if p.HasError() {
 			// Recognition error - abort rule
@@ -2052,7 +2079,7 @@ func (p *CalcliParser) CeilMathFunc() (localctx ICeilMathFuncContext) {
 		}
 	}
 	{
-		p.SetState(108)
+		p.SetState(114)
 		p.Match(CalcliParserLPAREN)
 		if p.HasError() {
 			// Recognition error - abort rule
@@ -2060,14 +2087,14 @@ func (p *CalcliParser) CeilMathFunc() (localctx ICeilMathFuncContext) {
 		}
 	}
 	{
-		p.SetState(109)
+		p.SetState(115)
 
 		var _x = p.expr(0)
 
 		localctx.(*CeilMathFuncContext).num = _x
 	}
 	{
-		p.SetState(110)
+		p.SetState(116)
 		p.Match(CalcliParserRPAREN)
 		if p.HasError() {
 			// Recognition error - abort rule
@@ -2201,7 +2228,7 @@ func (p *CalcliParser) CosMathFunc() (localctx ICosMathFuncContext) {
 	p.EnterRule(localctx, 20, CalcliParserRULE_cosMathFunc)
 	p.EnterOuterAlt(localctx, 1)
 	{
-		p.SetState(112)
+		p.SetState(118)
 		p.Match(CalcliParserCOS)
 		if p.HasError() {
 			// Recognition error - abort rule
@@ -2209,7 +2236,7 @@ func (p *CalcliParser) CosMathFunc() (localctx ICosMathFuncContext) {
 		}
 	}
 	{
-		p.SetState(113)
+		p.SetState(119)
 		p.Match(CalcliParserLPAREN)
 		if p.HasError() {
 			// Recognition error - abort rule
@@ -2217,14 +2244,14 @@ func (p *CalcliParser) CosMathFunc() (localctx ICosMathFuncContext) {
 		}
 	}
 	{
-		p.SetState(114)
+		p.SetState(120)
 
 		var _x = p.expr(0)
 
 		localctx.(*CosMathFuncContext).num = _x
 	}
 	{
-		p.SetState(115)
+		p.SetState(121)
 		p.Match(CalcliParserRPAREN)
 		if p.HasError() {
 			// Recognition error - abort rule
@@ -2358,7 +2385,7 @@ func (p *CalcliParser) ExpMathFunc() (localctx IExpMathFuncContext) {
 	p.EnterRule(localctx, 22, CalcliParserRULE_expMathFunc)
 	p.EnterOuterAlt(localctx, 1)
 	{
-		p.SetState(117)
+		p.SetState(123)
 		p.Match(CalcliParserEXP)
 		if p.HasError() {
 			// Recognition error - abort rule
@@ -2366,7 +2393,7 @@ func (p *CalcliParser) ExpMathFunc() (localctx IExpMathFuncContext) {
 		}
 	}
 	{
-		p.SetState(118)
+		p.SetState(124)
 		p.Match(CalcliParserLPAREN)
 		if p.HasError() {
 			// Recognition error - abort rule
@@ -2374,14 +2401,14 @@ func (p *CalcliParser) ExpMathFunc() (localctx IExpMathFuncContext) {
 		}
 	}
 	{
-		p.SetState(119)
+		p.SetState(125)
 
 		var _x = p.expr(0)
 
 		localctx.(*ExpMathFuncContext).num = _x
 	}
 	{
-		p.SetState(120)
+		p.SetState(126)
 		p.Match(CalcliParserRPAREN)
 		if p.HasError() {
 			// Recognition error - abort rule
@@ -2515,7 +2542,7 @@ func (p *CalcliParser) Exp2MathFunc() (localctx IExp2MathFuncContext) {
 	p.EnterRule(localctx, 24, CalcliParserRULE_exp2MathFunc)
 	p.EnterOuterAlt(localctx, 1)
 	{
-		p.SetState(122)
+		p.SetState(128)
 		p.Match(CalcliParserEXP2)
 		if p.HasError() {
 			// Recognition error - abort rule
@@ -2523,7 +2550,7 @@ func (p *CalcliParser) Exp2MathFunc() (localctx IExp2MathFuncContext) {
 		}
 	}
 	{
-		p.SetState(123)
+		p.SetState(129)
 		p.Match(CalcliParserLPAREN)
 		if p.HasError() {
 			// Recognition error - abort rule
@@ -2531,14 +2558,14 @@ func (p *CalcliParser) Exp2MathFunc() (localctx IExp2MathFuncContext) {
 		}
 	}
 	{
-		p.SetState(124)
+		p.SetState(130)
 
 		var _x = p.expr(0)
 
 		localctx.(*Exp2MathFuncContext).num = _x
 	}
 	{
-		p.SetState(125)
+		p.SetState(131)
 		p.Match(CalcliParserRPAREN)
 		if p.HasError() {
 			// Recognition error - abort rule
@@ -2672,7 +2699,7 @@ func (p *CalcliParser) FloorMathFunc() (localctx IFloorMathFuncContext) {
 	p.EnterRule(localctx, 26, CalcliParserRULE_floorMathFunc)
 	p.EnterOuterAlt(localctx, 1)
 	{
-		p.SetState(127)
+		p.SetState(133)
 		p.Match(CalcliParserFLOOR)
 		if p.HasError() {
 			// Recognition error - abort rule
@@ -2680,7 +2707,7 @@ func (p *CalcliParser) FloorMathFunc() (localctx IFloorMathFuncContext) {
 		}
 	}
 	{
-		p.SetState(128)
+		p.SetState(134)
 		p.Match(CalcliParserLPAREN)
 		if p.HasError() {
 			// Recognition error - abort rule
@@ -2688,14 +2715,14 @@ func (p *CalcliParser) FloorMathFunc() (localctx IFloorMathFuncContext) {
 		}
 	}
 	{
-		p.SetState(129)
+		p.SetState(135)
 
 		var _x = p.expr(0)
 
 		localctx.(*FloorMathFuncContext).num = _x
 	}
 	{
-		p.SetState(130)
+		p.SetState(136)
 		p.Match(CalcliParserRPAREN)
 		if p.HasError() {
 			// Recognition error - abort rule
@@ -2829,7 +2856,7 @@ func (p *CalcliParser) LnMathFunc() (localctx ILnMathFuncContext) {
 	p.EnterRule(localctx, 28, CalcliParserRULE_lnMathFunc)
 	p.EnterOuterAlt(localctx, 1)
 	{
-		p.SetState(132)
+		p.SetState(138)
 		p.Match(CalcliParserLN)
 		if p.HasError() {
 			// Recognition error - abort rule
@@ -2837,7 +2864,7 @@ func (p *CalcliParser) LnMathFunc() (localctx ILnMathFuncContext) {
 		}
 	}
 	{
-		p.SetState(133)
+		p.SetState(139)
 		p.Match(CalcliParserLPAREN)
 		if p.HasError() {
 			// Recognition error - abort rule
@@ -2845,14 +2872,14 @@ func (p *CalcliParser) LnMathFunc() (localctx ILnMathFuncContext) {
 		}
 	}
 	{
-		p.SetState(134)
+		p.SetState(140)
 
 		var _x = p.expr(0)
 
 		localctx.(*LnMathFuncContext).num = _x
 	}
 	{
-		p.SetState(135)
+		p.SetState(141)
 		p.Match(CalcliParserRPAREN)
 		if p.HasError() {
 			// Recognition error - abort rule
@@ -3028,7 +3055,7 @@ func (p *CalcliParser) LogMathFunc() (localctx ILogMathFuncContext) {
 	p.EnterRule(localctx, 30, CalcliParserRULE_logMathFunc)
 	p.EnterOuterAlt(localctx, 1)
 	{
-		p.SetState(137)
+		p.SetState(143)
 		p.Match(CalcliParserLOG)
 		if p.HasError() {
 			// Recognition error - abort rule
@@ -3036,7 +3063,7 @@ func (p *CalcliParser) LogMathFunc() (localctx ILogMathFuncContext) {
 		}
 	}
 	{
-		p.SetState(138)
+		p.SetState(144)
 		p.Match(CalcliParserLPAREN)
 		if p.HasError() {
 			// Recognition error - abort rule
@@ -3044,14 +3071,14 @@ func (p *CalcliParser) LogMathFunc() (localctx ILogMathFuncContext) {
 		}
 	}
 	{
-		p.SetState(139)
+		p.SetState(145)
 
 		var _x = p.expr(0)
 
 		localctx.(*LogMathFuncContext).num = _x
 	}
 	{
-		p.SetState(140)
+		p.SetState(146)
 		p.Match(CalcliParserCOMMA)
 		if p.HasError() {
 			// Recognition error - abort rule
@@ -3059,14 +3086,14 @@ func (p *CalcliParser) LogMathFunc() (localctx ILogMathFuncContext) {
 		}
 	}
 	{
-		p.SetState(141)
+		p.SetState(147)
 
 		var _x = p.expr(0)
 
 		localctx.(*LogMathFuncContext).base = _x
 	}
 	{
-		p.SetState(142)
+		p.SetState(148)
 		p.Match(CalcliParserRPAREN)
 		if p.HasError() {
 			// Recognition error - abort rule
@@ -3200,7 +3227,7 @@ func (p *CalcliParser) Log2MathFunc() (localctx ILog2MathFuncContext) {
 	p.EnterRule(localctx, 32, CalcliParserRULE_log2MathFunc)
 	p.EnterOuterAlt(localctx, 1)
 	{
-		p.SetState(144)
+		p.SetState(150)
 		p.Match(CalcliParserLOG2)
 		if p.HasError() {
 			// Recognition error - abort rule
@@ -3208,7 +3235,7 @@ func (p *CalcliParser) Log2MathFunc() (localctx ILog2MathFuncContext) {
 		}
 	}
 	{
-		p.SetState(145)
+		p.SetState(151)
 		p.Match(CalcliParserLPAREN)
 		if p.HasError() {
 			// Recognition error - abort rule
@@ -3216,14 +3243,14 @@ func (p *CalcliParser) Log2MathFunc() (localctx ILog2MathFuncContext) {
 		}
 	}
 	{
-		p.SetState(146)
+		p.SetState(152)
 
 		var _x = p.expr(0)
 
 		localctx.(*Log2MathFuncContext).num = _x
 	}
 	{
-		p.SetState(147)
+		p.SetState(153)
 		p.Match(CalcliParserRPAREN)
 		if p.HasError() {
 			// Recognition error - abort rule
@@ -3357,7 +3384,7 @@ func (p *CalcliParser) Log10MathFunc() (localctx ILog10MathFuncContext) {
 	p.EnterRule(localctx, 34, CalcliParserRULE_log10MathFunc)
 	p.EnterOuterAlt(localctx, 1)
 	{
-		p.SetState(149)
+		p.SetState(155)
 		p.Match(CalcliParserLOG10)
 		if p.HasError() {
 			// Recognition error - abort rule
@@ -3365,7 +3392,7 @@ func (p *CalcliParser) Log10MathFunc() (localctx ILog10MathFuncContext) {
 		}
 	}
 	{
-		p.SetState(150)
+		p.SetState(156)
 		p.Match(CalcliParserLPAREN)
 		if p.HasError() {
 			// Recognition error - abort rule
@@ -3373,14 +3400,14 @@ func (p *CalcliParser) Log10MathFunc() (localctx ILog10MathFuncContext) {
 		}
 	}
 	{
-		p.SetState(151)
+		p.SetState(157)
 
 		var _x = p.expr(0)
 
 		localctx.(*Log10MathFuncContext).num = _x
 	}
 	{
-		p.SetState(152)
+		p.SetState(158)
 		p.Match(CalcliParserRPAREN)
 		if p.HasError() {
 			// Recognition error - abort rule
@@ -3556,7 +3583,7 @@ func (p *CalcliParser) ModMathFunc() (localctx IModMathFuncContext) {
 	p.EnterRule(localctx, 36, CalcliParserRULE_modMathFunc)
 	p.EnterOuterAlt(localctx, 1)
 	{
-		p.SetState(154)
+		p.SetState(160)
 		p.Match(CalcliParserMOD)
 		if p.HasError() {
 			// Recognition error - abort rule
@@ -3564,7 +3591,7 @@ func (p *CalcliParser) ModMathFunc() (localctx IModMathFuncContext) {
 		}
 	}
 	{
-		p.SetState(155)
+		p.SetState(161)
 		p.Match(CalcliParserLPAREN)
 		if p.HasError() {
 			// Recognition error - abort rule
@@ -3572,14 +3599,14 @@ func (p *CalcliParser) ModMathFunc() (localctx IModMathFuncContext) {
 		}
 	}
 	{
-		p.SetState(156)
+		p.SetState(162)
 
 		var _x = p.expr(0)
 
 		localctx.(*ModMathFuncContext).left = _x
 	}
 	{
-		p.SetState(157)
+		p.SetState(163)
 		p.Match(CalcliParserCOMMA)
 		if p.HasError() {
 			// Recognition error - abort rule
@@ -3587,14 +3614,14 @@ func (p *CalcliParser) ModMathFunc() (localctx IModMathFuncContext) {
 		}
 	}
 	{
-		p.SetState(158)
+		p.SetState(164)
 
 		var _x = p.expr(0)
 
 		localctx.(*ModMathFuncContext).right = _x
 	}
 	{
-		p.SetState(159)
+		p.SetState(165)
 		p.Match(CalcliParserRPAREN)
 		if p.HasError() {
 			// Recognition error - abort rule
@@ -3770,7 +3797,7 @@ func (p *CalcliParser) NrtMathFunc() (localctx INrtMathFuncContext) {
 	p.EnterRule(localctx, 38, CalcliParserRULE_nrtMathFunc)
 	p.EnterOuterAlt(localctx, 1)
 	{
-		p.SetState(161)
+		p.SetState(167)
 		p.Match(CalcliParserNRT)
 		if p.HasError() {
 			// Recognition error - abort rule
@@ -3778,7 +3805,7 @@ func (p *CalcliParser) NrtMathFunc() (localctx INrtMathFuncContext) {
 		}
 	}
 	{
-		p.SetState(162)
+		p.SetState(168)
 		p.Match(CalcliParserLPAREN)
 		if p.HasError() {
 			// Recognition error - abort rule
@@ -3786,14 +3813,14 @@ func (p *CalcliParser) NrtMathFunc() (localctx INrtMathFuncContext) {
 		}
 	}
 	{
-		p.SetState(163)
+		p.SetState(169)
 
 		var _x = p.expr(0)
 
 		localctx.(*NrtMathFuncContext).num = _x
 	}
 	{
-		p.SetState(164)
+		p.SetState(170)
 		p.Match(CalcliParserCOMMA)
 		if p.HasError() {
 			// Recognition error - abort rule
@@ -3801,14 +3828,14 @@ func (p *CalcliParser) NrtMathFunc() (localctx INrtMathFuncContext) {
 		}
 	}
 	{
-		p.SetState(165)
+		p.SetState(171)
 
 		var _x = p.expr(0)
 
 		localctx.(*NrtMathFuncContext).degree = _x
 	}
 	{
-		p.SetState(166)
+		p.SetState(172)
 		p.Match(CalcliParserRPAREN)
 		if p.HasError() {
 			// Recognition error - abort rule
@@ -3984,7 +4011,7 @@ func (p *CalcliParser) PercentMathFunc() (localctx IPercentMathFuncContext) {
 	p.EnterRule(localctx, 40, CalcliParserRULE_percentMathFunc)
 	p.EnterOuterAlt(localctx, 1)
 	{
-		p.SetState(168)
+		p.SetState(174)
 		p.Match(CalcliParserPERCENTAGE)
 		if p.HasError() {
 			// Recognition error - abort rule
@@ -3992,7 +4019,7 @@ func (p *CalcliParser) PercentMathFunc() (localctx IPercentMathFuncContext) {
 		}
 	}
 	{
-		p.SetState(169)
+		p.SetState(175)
 		p.Match(CalcliParserLPAREN)
 		if p.HasError() {
 			// Recognition error - abort rule
@@ -4000,14 +4027,14 @@ func (p *CalcliParser) PercentMathFunc() (localctx IPercentMathFuncContext) {
 		}
 	}
 	{
-		p.SetState(170)
+		p.SetState(176)
 
 		var _x = p.expr(0)
 
 		localctx.(*PercentMathFuncContext).num = _x
 	}
 	{
-		p.SetState(171)
+		p.SetState(177)
 		p.Match(CalcliParserCOMMA)
 		if p.HasError() {
 			// Recognition error - abort rule
@@ -4015,14 +4042,14 @@ func (p *CalcliParser) PercentMathFunc() (localctx IPercentMathFuncContext) {
 		}
 	}
 	{
-		p.SetState(172)
+		p.SetState(178)
 
 		var _x = p.expr(0)
 
 		localctx.(*PercentMathFuncContext).from = _x
 	}
 	{
-		p.SetState(173)
+		p.SetState(179)
 		p.Match(CalcliParserRPAREN)
 		if p.HasError() {
 			// Recognition error - abort rule
@@ -4156,7 +4183,7 @@ func (p *CalcliParser) RoundMathFunc() (localctx IRoundMathFuncContext) {
 	p.EnterRule(localctx, 42, CalcliParserRULE_roundMathFunc)
 	p.EnterOuterAlt(localctx, 1)
 	{
-		p.SetState(175)
+		p.SetState(181)
 		p.Match(CalcliParserROUND)
 		if p.HasError() {
 			// Recognition error - abort rule
@@ -4164,7 +4191,7 @@ func (p *CalcliParser) RoundMathFunc() (localctx IRoundMathFuncContext) {
 		}
 	}
 	{
-		p.SetState(176)
+		p.SetState(182)
 		p.Match(CalcliParserLPAREN)
 		if p.HasError() {
 			// Recognition error - abort rule
@@ -4172,14 +4199,14 @@ func (p *CalcliParser) RoundMathFunc() (localctx IRoundMathFuncContext) {
 		}
 	}
 	{
-		p.SetState(177)
+		p.SetState(183)
 
 		var _x = p.expr(0)
 
 		localctx.(*RoundMathFuncContext).num = _x
 	}
 	{
-		p.SetState(178)
+		p.SetState(184)
 		p.Match(CalcliParserRPAREN)
 		if p.HasError() {
 			// Recognition error - abort rule
@@ -4313,7 +4340,7 @@ func (p *CalcliParser) SinMathFunc() (localctx ISinMathFuncContext) {
 	p.EnterRule(localctx, 44, CalcliParserRULE_sinMathFunc)
 	p.EnterOuterAlt(localctx, 1)
 	{
-		p.SetState(180)
+		p.SetState(186)
 		p.Match(CalcliParserSIN)
 		if p.HasError() {
 			// Recognition error - abort rule
@@ -4321,7 +4348,7 @@ func (p *CalcliParser) SinMathFunc() (localctx ISinMathFuncContext) {
 		}
 	}
 	{
-		p.SetState(181)
+		p.SetState(187)
 		p.Match(CalcliParserLPAREN)
 		if p.HasError() {
 			// Recognition error - abort rule
@@ -4329,14 +4356,14 @@ func (p *CalcliParser) SinMathFunc() (localctx ISinMathFuncContext) {
 		}
 	}
 	{
-		p.SetState(182)
+		p.SetState(188)
 
 		var _x = p.expr(0)
 
 		localctx.(*SinMathFuncContext).num = _x
 	}
 	{
-		p.SetState(183)
+		p.SetState(189)
 		p.Match(CalcliParserRPAREN)
 		if p.HasError() {
 			// Recognition error - abort rule
@@ -4470,7 +4497,7 @@ func (p *CalcliParser) SqrtMathFunc() (localctx ISqrtMathFuncContext) {
 	p.EnterRule(localctx, 46, CalcliParserRULE_sqrtMathFunc)
 	p.EnterOuterAlt(localctx, 1)
 	{
-		p.SetState(185)
+		p.SetState(191)
 		p.Match(CalcliParserSQRT)
 		if p.HasError() {
 			// Recognition error - abort rule
@@ -4478,7 +4505,7 @@ func (p *CalcliParser) SqrtMathFunc() (localctx ISqrtMathFuncContext) {
 		}
 	}
 	{
-		p.SetState(186)
+		p.SetState(192)
 		p.Match(CalcliParserLPAREN)
 		if p.HasError() {
 			// Recognition error - abort rule
@@ -4486,14 +4513,14 @@ func (p *CalcliParser) SqrtMathFunc() (localctx ISqrtMathFuncContext) {
 		}
 	}
 	{
-		p.SetState(187)
+		p.SetState(193)
 
 		var _x = p.expr(0)
 
 		localctx.(*SqrtMathFuncContext).num = _x
 	}
 	{
-		p.SetState(188)
+		p.SetState(194)
 		p.Match(CalcliParserRPAREN)
 		if p.HasError() {
 			// Recognition error - abort rule
@@ -4627,7 +4654,7 @@ func (p *CalcliParser) TanMathFunc() (localctx ITanMathFuncContext) {
 	p.EnterRule(localctx, 48, CalcliParserRULE_tanMathFunc)
 	p.EnterOuterAlt(localctx, 1)
 	{
-		p.SetState(190)
+		p.SetState(196)
 		p.Match(CalcliParserTAN)
 		if p.HasError() {
 			// Recognition error - abort rule
@@ -4635,7 +4662,7 @@ func (p *CalcliParser) TanMathFunc() (localctx ITanMathFuncContext) {
 		}
 	}
 	{
-		p.SetState(191)
+		p.SetState(197)
 		p.Match(CalcliParserLPAREN)
 		if p.HasError() {
 			// Recognition error - abort rule
@@ -4643,14 +4670,240 @@ func (p *CalcliParser) TanMathFunc() (localctx ITanMathFuncContext) {
 		}
 	}
 	{
-		p.SetState(192)
+		p.SetState(198)
 
 		var _x = p.expr(0)
 
 		localctx.(*TanMathFuncContext).num = _x
 	}
 	{
-		p.SetState(193)
+		p.SetState(199)
+		p.Match(CalcliParserRPAREN)
+		if p.HasError() {
+			// Recognition error - abort rule
+			goto errorExit
+		}
+	}
+
+errorExit:
+	if p.HasError() {
+		v := p.GetError()
+		localctx.SetException(v)
+		p.GetErrorHandler().ReportError(p, v)
+		p.GetErrorHandler().Recover(p, v)
+		p.SetError(nil)
+	}
+	p.ExitRule()
+	return localctx
+	goto errorExit // Trick to prevent compiler error if the label is not used
+}
+
+// ISysFuncContext is an interface to support dynamic dispatch.
+type ISysFuncContext interface {
+	antlr.ParserRuleContext
+
+	// GetParser returns the parser.
+	GetParser() antlr.Parser
+
+	// Getter signatures
+	PrintMemory() IPrintMemoryContext
+
+	// IsSysFuncContext differentiates from other interfaces.
+	IsSysFuncContext()
+}
+
+type SysFuncContext struct {
+	antlr.BaseParserRuleContext
+	parser antlr.Parser
+}
+
+func NewEmptySysFuncContext() *SysFuncContext {
+	var p = new(SysFuncContext)
+	antlr.InitBaseParserRuleContext(&p.BaseParserRuleContext, nil, -1)
+	p.RuleIndex = CalcliParserRULE_sysFunc
+	return p
+}
+
+func InitEmptySysFuncContext(p *SysFuncContext) {
+	antlr.InitBaseParserRuleContext(&p.BaseParserRuleContext, nil, -1)
+	p.RuleIndex = CalcliParserRULE_sysFunc
+}
+
+func (*SysFuncContext) IsSysFuncContext() {}
+
+func NewSysFuncContext(parser antlr.Parser, parent antlr.ParserRuleContext, invokingState int) *SysFuncContext {
+	var p = new(SysFuncContext)
+
+	antlr.InitBaseParserRuleContext(&p.BaseParserRuleContext, parent, invokingState)
+
+	p.parser = parser
+	p.RuleIndex = CalcliParserRULE_sysFunc
+
+	return p
+}
+
+func (s *SysFuncContext) GetParser() antlr.Parser { return s.parser }
+
+func (s *SysFuncContext) PrintMemory() IPrintMemoryContext {
+	var t antlr.RuleContext
+	for _, ctx := range s.GetChildren() {
+		if _, ok := ctx.(IPrintMemoryContext); ok {
+			t = ctx.(antlr.RuleContext)
+			break
+		}
+	}
+
+	if t == nil {
+		return nil
+	}
+
+	return t.(IPrintMemoryContext)
+}
+
+func (s *SysFuncContext) GetRuleContext() antlr.RuleContext {
+	return s
+}
+
+func (s *SysFuncContext) ToStringTree(ruleNames []string, recog antlr.Recognizer) string {
+	return antlr.TreesStringTree(s, ruleNames, recog)
+}
+
+func (s *SysFuncContext) EnterRule(listener antlr.ParseTreeListener) {
+	if listenerT, ok := listener.(CalcliListener); ok {
+		listenerT.EnterSysFunc(s)
+	}
+}
+
+func (s *SysFuncContext) ExitRule(listener antlr.ParseTreeListener) {
+	if listenerT, ok := listener.(CalcliListener); ok {
+		listenerT.ExitSysFunc(s)
+	}
+}
+
+func (p *CalcliParser) SysFunc() (localctx ISysFuncContext) {
+	localctx = NewSysFuncContext(p, p.GetParserRuleContext(), p.GetState())
+	p.EnterRule(localctx, 50, CalcliParserRULE_sysFunc)
+	p.EnterOuterAlt(localctx, 1)
+	{
+		p.SetState(201)
+		p.PrintMemory()
+	}
+
+errorExit:
+	if p.HasError() {
+		v := p.GetError()
+		localctx.SetException(v)
+		p.GetErrorHandler().ReportError(p, v)
+		p.GetErrorHandler().Recover(p, v)
+		p.SetError(nil)
+	}
+	p.ExitRule()
+	return localctx
+	goto errorExit // Trick to prevent compiler error if the label is not used
+}
+
+// IPrintMemoryContext is an interface to support dynamic dispatch.
+type IPrintMemoryContext interface {
+	antlr.ParserRuleContext
+
+	// GetParser returns the parser.
+	GetParser() antlr.Parser
+
+	// Getter signatures
+	PMEM() antlr.TerminalNode
+	LPAREN() antlr.TerminalNode
+	RPAREN() antlr.TerminalNode
+
+	// IsPrintMemoryContext differentiates from other interfaces.
+	IsPrintMemoryContext()
+}
+
+type PrintMemoryContext struct {
+	antlr.BaseParserRuleContext
+	parser antlr.Parser
+}
+
+func NewEmptyPrintMemoryContext() *PrintMemoryContext {
+	var p = new(PrintMemoryContext)
+	antlr.InitBaseParserRuleContext(&p.BaseParserRuleContext, nil, -1)
+	p.RuleIndex = CalcliParserRULE_printMemory
+	return p
+}
+
+func InitEmptyPrintMemoryContext(p *PrintMemoryContext) {
+	antlr.InitBaseParserRuleContext(&p.BaseParserRuleContext, nil, -1)
+	p.RuleIndex = CalcliParserRULE_printMemory
+}
+
+func (*PrintMemoryContext) IsPrintMemoryContext() {}
+
+func NewPrintMemoryContext(parser antlr.Parser, parent antlr.ParserRuleContext, invokingState int) *PrintMemoryContext {
+	var p = new(PrintMemoryContext)
+
+	antlr.InitBaseParserRuleContext(&p.BaseParserRuleContext, parent, invokingState)
+
+	p.parser = parser
+	p.RuleIndex = CalcliParserRULE_printMemory
+
+	return p
+}
+
+func (s *PrintMemoryContext) GetParser() antlr.Parser { return s.parser }
+
+func (s *PrintMemoryContext) PMEM() antlr.TerminalNode {
+	return s.GetToken(CalcliParserPMEM, 0)
+}
+
+func (s *PrintMemoryContext) LPAREN() antlr.TerminalNode {
+	return s.GetToken(CalcliParserLPAREN, 0)
+}
+
+func (s *PrintMemoryContext) RPAREN() antlr.TerminalNode {
+	return s.GetToken(CalcliParserRPAREN, 0)
+}
+
+func (s *PrintMemoryContext) GetRuleContext() antlr.RuleContext {
+	return s
+}
+
+func (s *PrintMemoryContext) ToStringTree(ruleNames []string, recog antlr.Recognizer) string {
+	return antlr.TreesStringTree(s, ruleNames, recog)
+}
+
+func (s *PrintMemoryContext) EnterRule(listener antlr.ParseTreeListener) {
+	if listenerT, ok := listener.(CalcliListener); ok {
+		listenerT.EnterPrintMemory(s)
+	}
+}
+
+func (s *PrintMemoryContext) ExitRule(listener antlr.ParseTreeListener) {
+	if listenerT, ok := listener.(CalcliListener); ok {
+		listenerT.ExitPrintMemory(s)
+	}
+}
+
+func (p *CalcliParser) PrintMemory() (localctx IPrintMemoryContext) {
+	localctx = NewPrintMemoryContext(p, p.GetParserRuleContext(), p.GetState())
+	p.EnterRule(localctx, 52, CalcliParserRULE_printMemory)
+	p.EnterOuterAlt(localctx, 1)
+	{
+		p.SetState(203)
+		p.Match(CalcliParserPMEM)
+		if p.HasError() {
+			// Recognition error - abort rule
+			goto errorExit
+		}
+	}
+	{
+		p.SetState(204)
+		p.Match(CalcliParserLPAREN)
+		if p.HasError() {
+			// Recognition error - abort rule
+			goto errorExit
+		}
+	}
+	{
+		p.SetState(205)
 		p.Match(CalcliParserRPAREN)
 		if p.HasError() {
 			// Recognition error - abort rule
@@ -4681,6 +4934,8 @@ type IStartContext interface {
 	// Getter signatures
 	Expr() IExprContext
 	EOF() antlr.TerminalNode
+	Assign() IAssignContext
+	SysFunc() ISysFuncContext
 
 	// IsStartContext differentiates from other interfaces.
 	IsStartContext()
@@ -4738,6 +4993,38 @@ func (s *StartContext) EOF() antlr.TerminalNode {
 	return s.GetToken(CalcliParserEOF, 0)
 }
 
+func (s *StartContext) Assign() IAssignContext {
+	var t antlr.RuleContext
+	for _, ctx := range s.GetChildren() {
+		if _, ok := ctx.(IAssignContext); ok {
+			t = ctx.(antlr.RuleContext)
+			break
+		}
+	}
+
+	if t == nil {
+		return nil
+	}
+
+	return t.(IAssignContext)
+}
+
+func (s *StartContext) SysFunc() ISysFuncContext {
+	var t antlr.RuleContext
+	for _, ctx := range s.GetChildren() {
+		if _, ok := ctx.(ISysFuncContext); ok {
+			t = ctx.(antlr.RuleContext)
+			break
+		}
+	}
+
+	if t == nil {
+		return nil
+	}
+
+	return t.(ISysFuncContext)
+}
+
 func (s *StartContext) GetRuleContext() antlr.RuleContext {
 	return s
 }
@@ -4760,19 +5047,61 @@ func (s *StartContext) ExitRule(listener antlr.ParseTreeListener) {
 
 func (p *CalcliParser) Start_() (localctx IStartContext) {
 	localctx = NewStartContext(p, p.GetParserRuleContext(), p.GetState())
-	p.EnterRule(localctx, 50, CalcliParserRULE_start)
-	p.EnterOuterAlt(localctx, 1)
-	{
-		p.SetState(195)
-		p.expr(0)
+	p.EnterRule(localctx, 54, CalcliParserRULE_start)
+	p.SetState(216)
+	p.GetErrorHandler().Sync(p)
+	if p.HasError() {
+		goto errorExit
 	}
-	{
-		p.SetState(196)
-		p.Match(CalcliParserEOF)
-		if p.HasError() {
-			// Recognition error - abort rule
-			goto errorExit
+
+	switch p.GetInterpreter().AdaptivePredict(p.BaseParser, p.GetTokenStream(), 2, p.GetParserRuleContext()) {
+	case 1:
+		p.EnterOuterAlt(localctx, 1)
+		{
+			p.SetState(207)
+			p.expr(0)
 		}
+		{
+			p.SetState(208)
+			p.Match(CalcliParserEOF)
+			if p.HasError() {
+				// Recognition error - abort rule
+				goto errorExit
+			}
+		}
+
+	case 2:
+		p.EnterOuterAlt(localctx, 2)
+		{
+			p.SetState(210)
+			p.Assign()
+		}
+		{
+			p.SetState(211)
+			p.Match(CalcliParserEOF)
+			if p.HasError() {
+				// Recognition error - abort rule
+				goto errorExit
+			}
+		}
+
+	case 3:
+		p.EnterOuterAlt(localctx, 3)
+		{
+			p.SetState(213)
+			p.SysFunc()
+		}
+		{
+			p.SetState(214)
+			p.Match(CalcliParserEOF)
+			if p.HasError() {
+				// Recognition error - abort rule
+				goto errorExit
+			}
+		}
+
+	case antlr.ATNInvalidAltNumber:
+		goto errorExit
 	}
 
 errorExit:
@@ -5401,27 +5730,27 @@ func (p *CalcliParser) expr(_p int) (localctx IExprContext) {
 	localctx = NewExprContext(p, p.GetParserRuleContext(), _parentState)
 	var _prevctx IExprContext = localctx
 	var _ antlr.ParserRuleContext = _prevctx // TODO: To prevent unused variable warning.
-	_startState := 52
-	p.EnterRecursionRule(localctx, 52, CalcliParserRULE_expr, _p)
+	_startState := 56
+	p.EnterRecursionRule(localctx, 56, CalcliParserRULE_expr, _p)
 	var _la int
 
 	var _alt int
 
 	p.EnterOuterAlt(localctx, 1)
-	p.SetState(207)
+	p.SetState(227)
 	p.GetErrorHandler().Sync(p)
 	if p.HasError() {
 		goto errorExit
 	}
 
 	switch p.GetTokenStream().LA(1) {
-	case CalcliParserEULER, CalcliParserINT, CalcliParserFLOAT, CalcliParserPI, CalcliParserPREVIOS:
+	case CalcliParserEULER, CalcliParserINT, CalcliParserFLOAT, CalcliParserPI, CalcliParserPREVIOS, CalcliParserVAR:
 		localctx = NewUnitValueContext(p, localctx)
 		p.SetParserRuleContext(localctx)
 		_prevctx = localctx
 
 		{
-			p.SetState(199)
+			p.SetState(219)
 			p.Unit()
 		}
 
@@ -5430,7 +5759,7 @@ func (p *CalcliParser) expr(_p int) (localctx IExprContext) {
 		p.SetParserRuleContext(localctx)
 		_prevctx = localctx
 		{
-			p.SetState(200)
+			p.SetState(220)
 			p.Match(CalcliParserMINUS)
 			if p.HasError() {
 				// Recognition error - abort rule
@@ -5438,7 +5767,7 @@ func (p *CalcliParser) expr(_p int) (localctx IExprContext) {
 			}
 		}
 		{
-			p.SetState(201)
+			p.SetState(221)
 
 			var _x = p.expr(7)
 
@@ -5450,7 +5779,7 @@ func (p *CalcliParser) expr(_p int) (localctx IExprContext) {
 		p.SetParserRuleContext(localctx)
 		_prevctx = localctx
 		{
-			p.SetState(202)
+			p.SetState(222)
 			p.Match(CalcliParserLPAREN)
 			if p.HasError() {
 				// Recognition error - abort rule
@@ -5458,14 +5787,14 @@ func (p *CalcliParser) expr(_p int) (localctx IExprContext) {
 			}
 		}
 		{
-			p.SetState(203)
+			p.SetState(223)
 
 			var _x = p.expr(0)
 
 			localctx.(*ParensContext).inner = _x
 		}
 		{
-			p.SetState(204)
+			p.SetState(224)
 			p.Match(CalcliParserRPAREN)
 			if p.HasError() {
 				// Recognition error - abort rule
@@ -5478,7 +5807,7 @@ func (p *CalcliParser) expr(_p int) (localctx IExprContext) {
 		p.SetParserRuleContext(localctx)
 		_prevctx = localctx
 		{
-			p.SetState(206)
+			p.SetState(226)
 			p.MathFunc()
 		}
 
@@ -5487,12 +5816,12 @@ func (p *CalcliParser) expr(_p int) (localctx IExprContext) {
 		goto errorExit
 	}
 	p.GetParserRuleContext().SetStop(p.GetTokenStream().LT(-1))
-	p.SetState(222)
+	p.SetState(242)
 	p.GetErrorHandler().Sync(p)
 	if p.HasError() {
 		goto errorExit
 	}
-	_alt = p.GetInterpreter().AdaptivePredict(p.BaseParser, p.GetTokenStream(), 4, p.GetParserRuleContext())
+	_alt = p.GetInterpreter().AdaptivePredict(p.BaseParser, p.GetTokenStream(), 5, p.GetParserRuleContext())
 	if p.HasError() {
 		goto errorExit
 	}
@@ -5502,26 +5831,26 @@ func (p *CalcliParser) expr(_p int) (localctx IExprContext) {
 				p.TriggerExitRuleEvent()
 			}
 			_prevctx = localctx
-			p.SetState(220)
+			p.SetState(240)
 			p.GetErrorHandler().Sync(p)
 			if p.HasError() {
 				goto errorExit
 			}
 
-			switch p.GetInterpreter().AdaptivePredict(p.BaseParser, p.GetTokenStream(), 3, p.GetParserRuleContext()) {
+			switch p.GetInterpreter().AdaptivePredict(p.BaseParser, p.GetTokenStream(), 4, p.GetParserRuleContext()) {
 			case 1:
 				localctx = NewPowContext(p, NewExprContext(p, _parentctx, _parentState))
 				localctx.(*PowContext).left = _prevctx
 
 				p.PushNewRecursionContext(localctx, _startState, CalcliParserRULE_expr)
-				p.SetState(209)
+				p.SetState(229)
 
 				if !(p.Precpred(p.GetParserRuleContext(), 3)) {
 					p.SetError(antlr.NewFailedPredicateException(p, "p.Precpred(p.GetParserRuleContext(), 3)", ""))
 					goto errorExit
 				}
 				{
-					p.SetState(210)
+					p.SetState(230)
 
 					var _m = p.Match(CalcliParserPOW)
 
@@ -5532,7 +5861,7 @@ func (p *CalcliParser) expr(_p int) (localctx IExprContext) {
 					}
 				}
 				{
-					p.SetState(211)
+					p.SetState(231)
 
 					var _x = p.expr(4)
 
@@ -5544,14 +5873,14 @@ func (p *CalcliParser) expr(_p int) (localctx IExprContext) {
 				localctx.(*MulDivModContext).left = _prevctx
 
 				p.PushNewRecursionContext(localctx, _startState, CalcliParserRULE_expr)
-				p.SetState(212)
+				p.SetState(232)
 
 				if !(p.Precpred(p.GetParserRuleContext(), 2)) {
 					p.SetError(antlr.NewFailedPredicateException(p, "p.Precpred(p.GetParserRuleContext(), 2)", ""))
 					goto errorExit
 				}
 				{
-					p.SetState(213)
+					p.SetState(233)
 
 					var _lt = p.GetTokenStream().LT(1)
 
@@ -5559,7 +5888,7 @@ func (p *CalcliParser) expr(_p int) (localctx IExprContext) {
 
 					_la = p.GetTokenStream().LA(1)
 
-					if !((int64(_la) & ^0x3f) == 0 && ((int64(1)<<_la)&25786580992) != 0) {
+					if !((int64(_la) & ^0x3f) == 0 && ((int64(1)<<_la)&206225539072) != 0) {
 						var _ri = p.GetErrorHandler().RecoverInline(p)
 
 						localctx.(*MulDivModContext).op = _ri
@@ -5569,7 +5898,7 @@ func (p *CalcliParser) expr(_p int) (localctx IExprContext) {
 					}
 				}
 				{
-					p.SetState(214)
+					p.SetState(234)
 
 					var _x = p.expr(3)
 
@@ -5581,14 +5910,14 @@ func (p *CalcliParser) expr(_p int) (localctx IExprContext) {
 				localctx.(*AddSubContext).left = _prevctx
 
 				p.PushNewRecursionContext(localctx, _startState, CalcliParserRULE_expr)
-				p.SetState(215)
+				p.SetState(235)
 
 				if !(p.Precpred(p.GetParserRuleContext(), 1)) {
 					p.SetError(antlr.NewFailedPredicateException(p, "p.Precpred(p.GetParserRuleContext(), 1)", ""))
 					goto errorExit
 				}
 				{
-					p.SetState(216)
+					p.SetState(236)
 
 					var _lt = p.GetTokenStream().LT(1)
 
@@ -5606,7 +5935,7 @@ func (p *CalcliParser) expr(_p int) (localctx IExprContext) {
 					}
 				}
 				{
-					p.SetState(217)
+					p.SetState(237)
 
 					var _x = p.expr(2)
 
@@ -5618,14 +5947,14 @@ func (p *CalcliParser) expr(_p int) (localctx IExprContext) {
 				localctx.(*FactorialContext).num = _prevctx
 
 				p.PushNewRecursionContext(localctx, _startState, CalcliParserRULE_expr)
-				p.SetState(218)
+				p.SetState(238)
 
 				if !(p.Precpred(p.GetParserRuleContext(), 4)) {
 					p.SetError(antlr.NewFailedPredicateException(p, "p.Precpred(p.GetParserRuleContext(), 4)", ""))
 					goto errorExit
 				}
 				{
-					p.SetState(219)
+					p.SetState(239)
 
 					var _m = p.Match(CalcliParserEXCLAMATION)
 
@@ -5641,12 +5970,12 @@ func (p *CalcliParser) expr(_p int) (localctx IExprContext) {
 			}
 
 		}
-		p.SetState(224)
+		p.SetState(244)
 		p.GetErrorHandler().Sync(p)
 		if p.HasError() {
 			goto errorExit
 		}
-		_alt = p.GetInterpreter().AdaptivePredict(p.BaseParser, p.GetTokenStream(), 4, p.GetParserRuleContext())
+		_alt = p.GetInterpreter().AdaptivePredict(p.BaseParser, p.GetTokenStream(), 5, p.GetParserRuleContext())
 		if p.HasError() {
 			goto errorExit
 		}
@@ -5665,9 +5994,153 @@ errorExit:
 	goto errorExit // Trick to prevent compiler error if the label is not used
 }
 
+// IAssignContext is an interface to support dynamic dispatch.
+type IAssignContext interface {
+	antlr.ParserRuleContext
+
+	// GetParser returns the parser.
+	GetParser() antlr.Parser
+
+	// GetVal returns the val rule contexts.
+	GetVal() IExprContext
+
+	// SetVal sets the val rule contexts.
+	SetVal(IExprContext)
+
+	// Getter signatures
+	VAR() antlr.TerminalNode
+	EQUAL() antlr.TerminalNode
+	Expr() IExprContext
+
+	// IsAssignContext differentiates from other interfaces.
+	IsAssignContext()
+}
+
+type AssignContext struct {
+	antlr.BaseParserRuleContext
+	parser antlr.Parser
+	val    IExprContext
+}
+
+func NewEmptyAssignContext() *AssignContext {
+	var p = new(AssignContext)
+	antlr.InitBaseParserRuleContext(&p.BaseParserRuleContext, nil, -1)
+	p.RuleIndex = CalcliParserRULE_assign
+	return p
+}
+
+func InitEmptyAssignContext(p *AssignContext) {
+	antlr.InitBaseParserRuleContext(&p.BaseParserRuleContext, nil, -1)
+	p.RuleIndex = CalcliParserRULE_assign
+}
+
+func (*AssignContext) IsAssignContext() {}
+
+func NewAssignContext(parser antlr.Parser, parent antlr.ParserRuleContext, invokingState int) *AssignContext {
+	var p = new(AssignContext)
+
+	antlr.InitBaseParserRuleContext(&p.BaseParserRuleContext, parent, invokingState)
+
+	p.parser = parser
+	p.RuleIndex = CalcliParserRULE_assign
+
+	return p
+}
+
+func (s *AssignContext) GetParser() antlr.Parser { return s.parser }
+
+func (s *AssignContext) GetVal() IExprContext { return s.val }
+
+func (s *AssignContext) SetVal(v IExprContext) { s.val = v }
+
+func (s *AssignContext) VAR() antlr.TerminalNode {
+	return s.GetToken(CalcliParserVAR, 0)
+}
+
+func (s *AssignContext) EQUAL() antlr.TerminalNode {
+	return s.GetToken(CalcliParserEQUAL, 0)
+}
+
+func (s *AssignContext) Expr() IExprContext {
+	var t antlr.RuleContext
+	for _, ctx := range s.GetChildren() {
+		if _, ok := ctx.(IExprContext); ok {
+			t = ctx.(antlr.RuleContext)
+			break
+		}
+	}
+
+	if t == nil {
+		return nil
+	}
+
+	return t.(IExprContext)
+}
+
+func (s *AssignContext) GetRuleContext() antlr.RuleContext {
+	return s
+}
+
+func (s *AssignContext) ToStringTree(ruleNames []string, recog antlr.Recognizer) string {
+	return antlr.TreesStringTree(s, ruleNames, recog)
+}
+
+func (s *AssignContext) EnterRule(listener antlr.ParseTreeListener) {
+	if listenerT, ok := listener.(CalcliListener); ok {
+		listenerT.EnterAssign(s)
+	}
+}
+
+func (s *AssignContext) ExitRule(listener antlr.ParseTreeListener) {
+	if listenerT, ok := listener.(CalcliListener); ok {
+		listenerT.ExitAssign(s)
+	}
+}
+
+func (p *CalcliParser) Assign() (localctx IAssignContext) {
+	localctx = NewAssignContext(p, p.GetParserRuleContext(), p.GetState())
+	p.EnterRule(localctx, 58, CalcliParserRULE_assign)
+	p.EnterOuterAlt(localctx, 1)
+	{
+		p.SetState(245)
+		p.Match(CalcliParserVAR)
+		if p.HasError() {
+			// Recognition error - abort rule
+			goto errorExit
+		}
+	}
+	{
+		p.SetState(246)
+		p.Match(CalcliParserEQUAL)
+		if p.HasError() {
+			// Recognition error - abort rule
+			goto errorExit
+		}
+	}
+	{
+		p.SetState(247)
+
+		var _x = p.expr(0)
+
+		localctx.(*AssignContext).val = _x
+	}
+
+errorExit:
+	if p.HasError() {
+		v := p.GetError()
+		localctx.SetException(v)
+		p.GetErrorHandler().ReportError(p, v)
+		p.GetErrorHandler().Recover(p, v)
+		p.SetError(nil)
+	}
+	p.ExitRule()
+	return localctx
+	goto errorExit // Trick to prevent compiler error if the label is not used
+}
+
 func (p *CalcliParser) Sempred(localctx antlr.RuleContext, ruleIndex, predIndex int) bool {
 	switch ruleIndex {
-	case 26:
+	case 28:
 		var t *ExprContext = nil
 		if localctx != nil {
 			t = localctx.(*ExprContext)

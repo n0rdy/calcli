@@ -1,6 +1,7 @@
 package parser
 
 import (
+	"fmt"
 	"math"
 	genparser "n0rdy.foo/calcli/calc/parser/gen"
 	"n0rdy.foo/calcli/calc/utils"
@@ -28,7 +29,15 @@ var (
 		11: 39916800,
 		12: 479001600,
 	}
+
+	// true is default, as most calculator operations return a value with a few exceptions
+	hasValueToReturn = true
 )
+
+type CalcResult struct {
+	Value    float64
+	HasValue bool
+}
 
 type CalcListener struct {
 	*genparser.BaseCalcliListener
@@ -42,12 +51,19 @@ func NewCalcListener() *CalcListener {
 	}
 }
 
-func (cl *CalcListener) Result() float64 {
-	return cl.stack.Pop()
+func (cl *CalcListener) Result() *CalcResult {
+	if hasValueToReturn {
+		return &CalcResult{
+			Value:    cl.stack.Pop(),
+			HasValue: true,
+		}
+	}
+	return &CalcResult{}
 }
 
 func (cl *CalcListener) Reset() {
 	cl.stack = utils.Stack{}
+	hasValueToReturn = true
 }
 
 // ExitConstant is called when production constant is exited.
@@ -64,7 +80,9 @@ func (cl *CalcListener) ExitConstant(ctx *genparser.ConstantContext) {
 // ExitVariable is called when production variable is exited.
 func (cl *CalcListener) ExitVariable(ctx *genparser.VariableContext) {
 	if ctx.PREVIOS() != nil {
-		cl.stack.Push(utils.PreviousResult)
+		cl.stack.Push(utils.GetPreviousResult())
+	} else if ctx.VAR() != nil {
+		cl.stack.Push(utils.GetVar(ctx.VAR().GetText()))
 	} else {
 		panic("unknown variable: " + ctx.GetText())
 	}
@@ -275,6 +293,31 @@ func (cl *CalcListener) ExitAddSub(ctx *genparser.AddSubContext) {
 	default:
 		panic("unknown operator: " + ctx.GetOp().GetText())
 	}
+}
+
+// ExitPrintMemory is called when production printMemory is exited.
+func (cl *CalcListener) ExitPrintMemory(ctx *genparser.PrintMemoryContext) {
+	hasValueToReturn = false
+
+	vars := utils.GetVars()
+	if len(vars) == 0 {
+		fmt.Println("no variables")
+		return
+	}
+
+	for name, value := range vars {
+		fmt.Println(name, "=", value)
+	}
+}
+
+// ExitAssign is called when production assign is exited.
+func (cl *CalcListener) ExitAssign(ctx *genparser.AssignContext) {
+	hasValueToReturn = false
+
+	val := cl.stack.Pop()
+	varName := ctx.VAR().GetText()
+	utils.SetVar(varName, val)
+	fmt.Println(varName, "=", val)
 }
 
 func (cl *CalcListener) factorial(n int) int {

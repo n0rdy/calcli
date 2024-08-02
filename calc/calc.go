@@ -8,24 +8,24 @@ import (
 	genparser "n0rdy.foo/calcli/calc/parser/gen"
 )
 
-type Calc struct {
+type CalcProcessor struct {
 	listener *parser.CalcListener
 }
 
-func NewCalc() Calc {
-	return Calc{
+func NewCalcProcessor() CalcProcessor {
+	return CalcProcessor{
 		listener: parser.NewCalcListener(),
 	}
 }
 
-func (c *Calc) Calculate(input string) (r float64, e error) {
+func (cp *CalcProcessor) Process(input string) (r *parser.CalcResult, e error) {
 	// recovery from panics of CalcListener
 	defer func() {
 		if r := recover(); r != nil {
 			e = errors.New(fmt.Sprint(r))
 		}
 	}()
-	defer c.listener.Reset()
+	defer cp.listener.Reset()
 
 	// set up the input stream
 	is := antlr.NewInputStream(input)
@@ -49,14 +49,14 @@ func (c *Calc) Calculate(input string) (r float64, e error) {
 	p.AddErrorListener(panicErrorListener)
 
 	// parse the input
-	antlr.ParseTreeWalkerDefault.Walk(c.listener, p.Start_())
+	antlr.ParseTreeWalkerDefault.Walk(cp.listener, p.Start_())
 
 	if lexer.GetError() != nil {
-		return 0, errors.New(lexer.GetError().GetMessage())
+		return nil, errors.New(lexer.GetError().GetMessage())
 	}
 	if p.GetError() != nil {
-		return 0, errors.New(p.GetError().GetMessage())
+		return nil, errors.New(p.GetError().GetMessage())
 	}
 
-	return c.listener.Result(), nil
+	return cp.listener.Result(), nil
 }

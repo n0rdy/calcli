@@ -171,6 +171,18 @@ func (s *BaseCalcliListener) EnterTanMathFunc(ctx *TanMathFuncContext) {}
 // ExitTanMathFunc is called when production tanMathFunc is exited.
 func (s *BaseCalcliListener) ExitTanMathFunc(ctx *TanMathFuncContext) {}
 
+// EnterSysFunc is called when production sysFunc is entered.
+func (s *BaseCalcliListener) EnterSysFunc(ctx *SysFuncContext) {}
+
+// ExitSysFunc is called when production sysFunc is exited.
+func (s *BaseCalcliListener) ExitSysFunc(ctx *SysFuncContext) {}
+
+// EnterPrintMemory is called when production printMemory is entered.
+func (s *BaseCalcliListener) EnterPrintMemory(ctx *PrintMemoryContext) {}
+
+// ExitPrintMemory is called when production printMemory is exited.
+func (s *BaseCalcliListener) ExitPrintMemory(ctx *PrintMemoryContext) {}
+
 // EnterStart is called when production start is entered.
 func (s *BaseCalcliListener) EnterStart(ctx *StartContext) {}
 
@@ -224,3 +236,9 @@ func (s *BaseCalcliListener) EnterPow(ctx *PowContext) {}
 
 // ExitPow is called when production Pow is exited.
 func (s *BaseCalcliListener) ExitPow(ctx *PowContext) {}
+
+// EnterAssign is called when production assign is entered.
+func (s *BaseCalcliListener) EnterAssign(ctx *AssignContext) {}
+
+// ExitAssign is called when production assign is exited.
+func (s *BaseCalcliListener) ExitAssign(ctx *AssignContext) {}

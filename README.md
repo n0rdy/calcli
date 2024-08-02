@@ -112,6 +112,8 @@ Type `exit` to quit the app.
   - `sin(x)` - the sine of `x`
   - `sqrt(x)` - the square root of `x`
   - `tan(x)` - the tangent of `x`
-- the result of the previous calculation is stored in the variable `$pr` and can be used in further calculations.
+- the result of the previous calculation is stored in the variable `$pr` and can be used in further calculations
+- it is possible to persist the result of the calculation or a value in the variable and use it in further calculations `$var = 5 + 5`
+- calling `pmem()` system function will print all the variables and their values stored in memory
 
 Have fun! =)

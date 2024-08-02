@@ -29,8 +29,16 @@ COS
     : 'cos'
     ;
 
+DOLLAR
+    : '$'
+    ;
+
 DOT
     : '.'
+    ;
+
+EQUAL
+    : '='
     ;
 
 EULER
@@ -109,6 +117,10 @@ PLUS
     : '+'
     ;
 
+PMEM
+    : 'pmem'
+    ;
+
 POW
     : '^'
     ;
@@ -145,6 +157,10 @@ TAN
     : 'tan'
     ;
 
+VAR
+    : DOLLAR [0-9a-zA-Z]+
+    ;
+
 WS
     : [ \t\r\n]+ -> skip
     ;
@@ -170,6 +186,7 @@ number
 
 variable
     : PREVIOS
+    | VAR
     ;
 
 // math functions:
@@ -276,9 +293,20 @@ tanMathFunc
     : TAN LPAREN num=expr RPAREN
     ;
 
+// system functions:
+sysFunc
+    : printMemory
+    ;
+
+printMemory
+    : PMEM LPAREN RPAREN
+    ;
+
 // Expressions
 start
     : expr EOF
+    | assign EOF
+    | sysFunc EOF
     ;
 
 expr
@@ -291,3 +319,7 @@ expr
      | left=expr op=(STAR | SLASH | PERCENT) right=expr     # MulDivMod
      | left=expr op=(PLUS | MINUS) right=expr               # AddSub
      ;
+
+assign
+    : VAR EQUAL val=expr
+    ;

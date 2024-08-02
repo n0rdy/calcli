@@ -83,6 +83,12 @@ type CalcliListener interface {
 	// EnterTanMathFunc is called when entering the tanMathFunc production.
 	EnterTanMathFunc(c *TanMathFuncContext)
 
+	// EnterSysFunc is called when entering the sysFunc production.
+	EnterSysFunc(c *SysFuncContext)
+
+	// EnterPrintMemory is called when entering the printMemory production.
+	EnterPrintMemory(c *PrintMemoryContext)
+
 	// EnterStart is called when entering the start production.
 	EnterStart(c *StartContext)
 
@@ -109,6 +115,9 @@ type CalcliListener interface {
 
 	// EnterPow is called when entering the Pow production.
 	EnterPow(c *PowContext)
+
+	// EnterAssign is called when entering the assign production.
+	EnterAssign(c *AssignContext)
 
 	// ExitUnit is called when exiting the unit production.
 	ExitUnit(c *UnitContext)
@@ -185,6 +194,12 @@ type CalcliListener interface {
 	// ExitTanMathFunc is called when exiting the tanMathFunc production.
 	ExitTanMathFunc(c *TanMathFuncContext)
 
+	// ExitSysFunc is called when exiting the sysFunc production.
+	ExitSysFunc(c *SysFuncContext)
+
+	// ExitPrintMemory is called when exiting the printMemory production.
+	ExitPrintMemory(c *PrintMemoryContext)
+
 	// ExitStart is called when exiting the start production.
 	ExitStart(c *StartContext)
 
@@ -211,4 +226,7 @@ type CalcliListener interface {
 
 	// ExitPow is called when exiting the Pow production.
 	ExitPow(c *PowContext)
+
+	// ExitAssign is called when exiting the assign production.
+	ExitAssign(c *AssignContext)
 }
