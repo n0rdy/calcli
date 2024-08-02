@@ -50,7 +50,7 @@ The result of the previous calculation is stored in the variable '$pr'
 and can be used in subsequent calculations.
 
 Have fun =)`,
-	Version: "0.0.1",
+	Version: "0.0.2",
 	Run: func(cmd *cobra.Command, args []string) {
 		c := calc.NewCalcProcessor()
 
