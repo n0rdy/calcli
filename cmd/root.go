@@ -47,14 +47,15 @@ Supports the following math functions:
 - tan(x) - the tangent of x
 
 The result of the previous calculation is stored in the variable '$pr'
-and can be used in subsequent calculations.
+and can be used in subsequent calculations.1
 
 Have fun =)`,
-	Version: "0.0.2",
+	Version: "0.0.3",
 	Run: func(cmd *cobra.Command, args []string) {
 		c := calc.NewCalcProcessor()
 
 		for {
+			fmt.Println("Type your expression or 'exit' to quit")
 			input := userInput()
 			if input == "" {
 				continue

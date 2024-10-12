@@ -1,6 +1,6 @@
 grammar Calcli;
 
-// Tokens
+// Tokens:
 ABS
     : 'abs'
     ;
