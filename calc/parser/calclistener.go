@@ -91,7 +91,7 @@ func (cl *CalcListener) ExitVariable(ctx *genparser.VariableContext) {
 // ExitNumber is called when production number is exited.
 func (cl *CalcListener) ExitNumber(ctx *genparser.NumberContext) {
 	if ctx.INT() != nil {
-		i, err := strconv.ParseInt(cl.removeSpaces(ctx.GetText()), 10, 64)
+		i, err := strconv.ParseInt(cl.removeCommas(ctx.GetText()), 10, 64)
 		if err != nil {
 			panic("failed to parse int: " + err.Error())
 		}
@@ -100,7 +100,7 @@ func (cl *CalcListener) ExitNumber(ctx *genparser.NumberContext) {
 		// e.g.: 5 / 2 = 2.5, not 2
 		cl.stack.Push(float64(i))
 	} else if ctx.FLOAT() != nil {
-		f, err := strconv.ParseFloat(cl.removeSpaces(ctx.GetText()), 64)
+		f, err := strconv.ParseFloat(cl.removeCommas(ctx.GetText()), 64)
 		if err != nil {
 			panic("failed to parse float: " + err.Error())
 		}
@@ -327,6 +327,6 @@ func (cl *CalcListener) factorial(n int) int {
 	return n * cl.factorial(n-1)
 }
 
-func (cl *CalcListener) removeSpaces(text string) string {
-	return strings.ReplaceAll(text, " ", "")
+func (cl *CalcListener) removeCommas(text string) string {
+	return strings.ReplaceAll(text, ",", "")
 }

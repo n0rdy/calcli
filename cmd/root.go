@@ -3,14 +3,13 @@ package cmd
 import (
 	"bufio"
 	"fmt"
+	"github.com/dustin/go-humanize"
+	"github.com/spf13/cobra"
 	"math"
 	"n0rdy.foo/calcli/calc"
 	"n0rdy.foo/calcli/calc/parser"
 	"n0rdy.foo/calcli/calc/utils"
 	"os"
-	"strconv"
-
-	"github.com/spf13/cobra"
 )
 
 const (
@@ -103,11 +102,10 @@ func processResult(res parser.CalcResult) {
 	}
 
 	utils.SetPreviousResult(val)
-	// the `fmt.Println(val)` construction prints value with the exponential notation (e.g. 1.234567e+02) for large numbers,
-	// that's why we are using the `strconv.FormatFloat` construction to print the value in the decimal notation
+	// the `fmt.Println(val)` construction prints value with the exponential notation (e.g. 1.234567e+02) for large numbers
 	// TODO: consider providing a config option: decimal vs exponential notation
-	// TODO: consider formatting to have a space as a thousand separator
-	fmt.Println(strconv.FormatFloat(val, 'g', -1, 64))
+	//fmt.Println(strconv.FormatFloat(val, 'g', -1, 64))
+	fmt.Println(humanize.Commaf(val))
 }
 
 func Execute() {

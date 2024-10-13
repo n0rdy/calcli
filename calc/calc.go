@@ -6,6 +6,7 @@ import (
 	"github.com/antlr4-go/antlr/v4"
 	"n0rdy.foo/calcli/calc/parser"
 	genparser "n0rdy.foo/calcli/calc/parser/gen"
+	"strings"
 )
 
 type CalcProcessor struct {
@@ -28,7 +29,7 @@ func (cp *CalcProcessor) Process(input string) (r *parser.CalcResult, e error) {
 	defer cp.listener.Reset()
 
 	// set up the input stream
-	is := antlr.NewInputStream(input)
+	is := antlr.NewInputStream(cp.removeSpaces(input))
 
 	// custom error listener to panic on syntax errors and terminate the parsing immediately
 	panicErrorListener := parser.NewPanicErrorListener()
@@ -59,4 +60,8 @@ func (cp *CalcProcessor) Process(input string) (r *parser.CalcResult, e error) {
 	}
 
 	return cp.listener.Result(), nil
+}
+
+func (cp *CalcProcessor) removeSpaces(text string) string {
+	return strings.ReplaceAll(text, " ", "")
 }
