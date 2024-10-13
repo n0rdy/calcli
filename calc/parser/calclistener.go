@@ -6,11 +6,11 @@ import (
 	genparser "n0rdy.foo/calcli/calc/parser/gen"
 	"n0rdy.foo/calcli/calc/utils"
 	"strconv"
+	"strings"
 )
 
 const (
-	pi = 3.141592653589793
-	e  = 2.718281828459045
+	e = 2.718281828459045
 )
 
 var (
@@ -69,7 +69,7 @@ func (cl *CalcListener) Reset() {
 // ExitConstant is called when production constant is exited.
 func (cl *CalcListener) ExitConstant(ctx *genparser.ConstantContext) {
 	if ctx.PI() != nil {
-		cl.stack.Push(pi)
+		cl.stack.Push(math.Pi)
 	} else if ctx.EULER() != nil {
 		cl.stack.Push(e)
 	} else {
@@ -91,7 +91,7 @@ func (cl *CalcListener) ExitVariable(ctx *genparser.VariableContext) {
 // ExitNumber is called when production number is exited.
 func (cl *CalcListener) ExitNumber(ctx *genparser.NumberContext) {
 	if ctx.INT() != nil {
-		i, err := strconv.Atoi(ctx.GetText())
+		i, err := strconv.ParseInt(cl.removeSpaces(ctx.GetText()), 10, 64)
 		if err != nil {
 			panic("failed to parse int: " + err.Error())
 		}
@@ -100,7 +100,7 @@ func (cl *CalcListener) ExitNumber(ctx *genparser.NumberContext) {
 		// e.g.: 5 / 2 = 2.5, not 2
 		cl.stack.Push(float64(i))
 	} else if ctx.FLOAT() != nil {
-		f, err := strconv.ParseFloat(ctx.GetText(), 64)
+		f, err := strconv.ParseFloat(cl.removeSpaces(ctx.GetText()), 64)
 		if err != nil {
 			panic("failed to parse float: " + err.Error())
 		}
@@ -325,4 +325,8 @@ func (cl *CalcListener) factorial(n int) int {
 		return factorials[n]
 	}
 	return n * cl.factorial(n-1)
+}
+
+func (cl *CalcListener) removeSpaces(text string) string {
+	return strings.ReplaceAll(text, " ", "")
 }

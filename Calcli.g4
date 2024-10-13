@@ -58,11 +58,11 @@ EXP2
     ;
 
 INT
-    : [0-9]+
+    : [0-9 ]+
     ;
 
 FLOAT
-    : [0-9]+ DOT [0-9]+
+    : INT DOT INT
     ;
 
 FLOOR

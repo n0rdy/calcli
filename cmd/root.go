@@ -8,6 +8,7 @@ import (
 	"n0rdy.foo/calcli/calc/parser"
 	"n0rdy.foo/calcli/calc/utils"
 	"os"
+	"strconv"
 
 	"github.com/spf13/cobra"
 )
@@ -50,7 +51,7 @@ The result of the previous calculation is stored in the variable '$pr'
 and can be used in subsequent calculations.1
 
 Have fun =)`,
-	Version: "0.0.3",
+	Version: "0.0.4",
 	Run: func(cmd *cobra.Command, args []string) {
 		c := calc.NewCalcProcessor()
 
@@ -102,7 +103,11 @@ func processResult(res parser.CalcResult) {
 	}
 
 	utils.SetPreviousResult(val)
-	fmt.Println(val)
+	// the `fmt.Println(val)` construction prints value with the exponential notation (e.g. 1.234567e+02) for large numbers,
+	// that's why we are using the `strconv.FormatFloat` construction to print the value in the decimal notation
+	// TODO: consider providing a config option: decimal vs exponential notation
+	// TODO: consider formatting to have a space as a thousand separator
+	fmt.Println(strconv.FormatFloat(val, 'g', -1, 64))
 }
 
 func Execute() {
@@ -114,4 +119,7 @@ func Execute() {
 
 func init() {
 	rootCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
+
+	versionTemplate := `{{printf "%s version %s\n" .Name .Version}}`
+	rootCmd.SetVersionTemplate(versionTemplate)
 }
