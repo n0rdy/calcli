@@ -1,8 +1,11 @@
 # CalCLI - a CLI calculator
 
-A cross-platform CLI calculator app with a rich set of [features](#features).
+An overengineered (because it's fun) cross-platform CLI calculator app with a rich set of [features](#features).
 
-It is handy if you need to do some quick calculations while hacking in the terminal - no need to open a calculator app.
+It is handy if you need to do some quick calculations while hacking in the terminal - no need to open a calculator app of any kind.
+
+The flow of the app is as follows:
+![](https://github.com/n0rdy/calcli/blob/main/docs/flow.gif)
 
 ## Table of contents
 * [Installation](#installation)
@@ -85,7 +88,9 @@ calcli
 This will start the app in the interactive mode.
 Type your expression and press Enter to get the result.
 
-Type `exit` to quit the app.
+Press `Ctrl+C` or `Esc` to exit the app.
+
+Check the bottom of the screen for the help message with the list of available commands and hotkeys.
 
 ## Features
 - basic arithmetic operations: `+`, `-`, `*`, `/`, `%`, `^`, `!`, as well as parentheses
@@ -114,6 +119,8 @@ Type `exit` to quit the app.
   - `tan(x)` - the tangent of `x`
 - the result of the previous calculation is stored in the variable `$pr` and can be used in further calculations
 - it is possible to persist the result of the calculation or a value in the variable and use it in further calculations `$var = 5 + 5`
-- calling `pmem()` system function will print 
+- calling `pmem()` system function will print all the variables stored in memory
+- review the history of calculations by pressing the `Up` and `Down` arrow keys, or switching to the history mode by typing `:h` and pressing `Enter`
+- in history mode, press `/` to search for a specific expression in the history
 
 Have fun! =)
