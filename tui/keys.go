@@ -28,7 +28,7 @@ type keyMapHistoryMode struct {
 var (
 	quitKeyBinding = key.NewBinding(
 		key.WithKeys("ctrl+c", "esc"),
-		key.WithHelp("ctrl+c/esc", "quit"),
+		key.WithHelp("ctrl+c/esc", "Quit"),
 	)
 
 	calculatorModeKeys = keyMapCalculatorMode{

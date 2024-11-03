@@ -7,7 +7,6 @@ import (
 	"github.com/charmbracelet/bubbles/textinput"
 	tea "github.com/charmbracelet/bubbletea"
 	"github.com/charmbracelet/lipgloss"
-	"github.com/dustin/go-humanize"
 	"math"
 	"n0rdy.foo/calcli/calc"
 	"n0rdy.foo/calcli/calc/parser"
@@ -205,7 +204,7 @@ func (m Model) processCalcResult(res parser.CalcResult) string {
 	}
 
 	utils.SetPreviousResult(val)
-	return humanize.Commaf(val)
+	return utils.Spacefy(val)
 }
 
 func (m Model) processCmdModeInput(input string) (Model, tea.Cmd) {
