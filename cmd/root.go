@@ -1,19 +1,12 @@
 package cmd
 
 import (
-	"bufio"
 	"fmt"
-	"github.com/dustin/go-humanize"
+	tea "github.com/charmbracelet/bubbletea"
 	"github.com/spf13/cobra"
-	"math"
 	"n0rdy.foo/calcli/calc"
-	"n0rdy.foo/calcli/calc/parser"
-	"n0rdy.foo/calcli/calc/utils"
+	"n0rdy.foo/calcli/tui"
 	"os"
-)
-
-const (
-	exitCmd = "exit"
 )
 
 // rootCmd represents the base command when called without any subcommands
@@ -24,6 +17,7 @@ var rootCmd = &cobra.Command{
 
 Supports basic arithmetic operations: +, -, *, /, %, ^, !, as well as parentheses.
 Contains a set of predefined constants: pi, e.
+
 Supports the following math functions:
 - abs(x) - the absolute value of x
 - acos(x) - the arccosine of x
@@ -46,66 +40,24 @@ Supports the following math functions:
 - sqrt(x) - the square root of x
 - tan(x) - the tangent of x
 
+Also, supports the following system functions:
+- pmem() - prints all the variables and their values stored in memory
+
 The result of the previous calculation is stored in the variable '$pr'
-and can be used in subsequent calculations.1
+and can be used in subsequent calculations.
 
 Have fun =)`,
-	Version: "0.0.4",
+	Version: "0.0.5",
 	Run: func(cmd *cobra.Command, args []string) {
-		c := calc.NewCalcProcessor()
-
-		for {
-			fmt.Println("Type your expression or 'exit' to quit")
-			input := userInput()
-			if input == "" {
-				continue
-			}
-			if input == exitCmd {
-				break
-			}
-
-			res, err := c.Process(input)
-			if err != nil {
-				fmt.Println(err)
-				fmt.Println()
-				continue
-			}
-			processResult(*res)
-			fmt.Println()
+		p := tea.NewProgram(
+			tui.InitialModel(calc.NewCalcProcessor()),
+			tea.WithAltScreen(),
+		)
+		if _, err := p.Run(); err != nil {
+			fmt.Println("could not run program:", err)
+			os.Exit(1)
 		}
 	},
-}
-
-func userInput() string {
-	scanner := bufio.NewScanner(os.Stdin)
-	scanner.Scan()
-	return scanner.Text()
-}
-
-func processResult(res parser.CalcResult) {
-	if !res.HasValue {
-		return
-	}
-
-	val := res.Value
-	if math.IsNaN(val) {
-		fmt.Println("NaN")
-		return
-	}
-	if math.IsInf(val, -1) {
-		fmt.Println("-∞")
-		return
-	}
-	if math.IsInf(val, 1) {
-		fmt.Println("+∞")
-		return
-	}
-
-	utils.SetPreviousResult(val)
-	// the `fmt.Println(val)` construction prints value with the exponential notation (e.g. 1.234567e+02) for large numbers
-	// TODO: consider providing a config option: decimal vs exponential notation
-	//fmt.Println(strconv.FormatFloat(val, 'g', -1, 64))
-	fmt.Println(humanize.Commaf(val))
 }
 
 func Execute() {
@@ -113,11 +65,4 @@ func Execute() {
 	if err != nil {
 		os.Exit(1)
 	}
-}
-
-func init() {
-	rootCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
-
-	versionTemplate := `{{printf "%s version %s\n" .Name .Version}}`
-	rootCmd.SetVersionTemplate(versionTemplate)
 }

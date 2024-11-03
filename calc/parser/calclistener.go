@@ -4,9 +4,16 @@ import (
 	"fmt"
 	"math"
 	genparser "n0rdy.foo/calcli/calc/parser/gen"
-	"n0rdy.foo/calcli/calc/utils"
+	"n0rdy.foo/calcli/utils"
 	"strconv"
 	"strings"
+)
+
+const (
+	// CalculationType when the operation is a calculation
+	CalculationType = iota
+	// OutputType when the operation is an output, like pmem() or assignment of a variable
+	OutputType
 )
 
 const (
@@ -29,41 +36,49 @@ var (
 		11: 39916800,
 		12: 479001600,
 	}
-
-	// true is default, as most calculator operations return a value with a few exceptions
-	hasValueToReturn = true
 )
 
 type CalcResult struct {
-	Value    float64
-	HasValue bool
+	Value  float64
+	Output string
+	Type   int
 }
 
 type CalcListener struct {
 	*genparser.BaseCalcliListener
 
-	stack utils.Stack
+	stack      utils.Stack
+	output     string
+	resultType int
 }
 
 func NewCalcListener() *CalcListener {
 	return &CalcListener{
-		stack: utils.Stack{},
+		stack:  utils.Stack{},
+		output: "",
+		// CalculationType is a default value as most cases are calculations
+		resultType: CalculationType,
 	}
 }
 
 func (cl *CalcListener) Result() *CalcResult {
-	if hasValueToReturn {
+	if cl.resultType == CalculationType {
 		return &CalcResult{
-			Value:    cl.stack.Pop(),
-			HasValue: true,
+			Value: cl.stack.Pop(),
+			Type:  CalculationType,
+		}
+	} else {
+		return &CalcResult{
+			Output: cl.output,
+			Type:   OutputType,
 		}
 	}
-	return &CalcResult{}
 }
 
 func (cl *CalcListener) Reset() {
 	cl.stack = utils.Stack{}
-	hasValueToReturn = true
+	cl.output = ""
+	cl.resultType = CalculationType
 }
 
 // ExitConstant is called when production constant is exited.
@@ -297,27 +312,30 @@ func (cl *CalcListener) ExitAddSub(ctx *genparser.AddSubContext) {
 
 // ExitPrintMemory is called when production printMemory is exited.
 func (cl *CalcListener) ExitPrintMemory(ctx *genparser.PrintMemoryContext) {
-	hasValueToReturn = false
+	cl.resultType = OutputType
 
 	vars := utils.GetVars()
 	if len(vars) == 0 {
-		fmt.Println("no variables")
+		cl.output = "no variables"
 		return
 	}
 
 	for name, value := range vars {
-		fmt.Println(name, "=", value)
+		cl.output += fmt.Sprintf("%s = %v\n", name, value)
 	}
+	// removes the last newline character
+	cl.output = cl.output[:len(cl.output)-1]
 }
 
 // ExitAssign is called when production assign is exited.
 func (cl *CalcListener) ExitAssign(ctx *genparser.AssignContext) {
-	hasValueToReturn = false
+	cl.resultType = OutputType
 
 	val := cl.stack.Pop()
 	varName := ctx.VAR().GetText()
 	utils.SetVar(varName, val)
-	fmt.Println(varName, "=", val)
+	utils.AddToken(varName)
+	cl.output = fmt.Sprintf("%s = %v", varName, val)
 }
 
 func (cl *CalcListener) factorial(n int) int {
