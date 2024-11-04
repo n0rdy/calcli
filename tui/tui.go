@@ -34,7 +34,7 @@ var (
 	docStyle = lipgloss.NewStyle().Margin(1, 2)
 )
 
-func InitialModel(c calc.CalcProcessor) *Model {
+func InitialModel(c calc.CalcProcessor) Model {
 	ti := textinput.New()
 	ti.Focus()
 	ti.Width = 80
@@ -49,7 +49,7 @@ func InitialModel(c calc.CalcProcessor) *Model {
 	h := help.New()
 	h.ShowAll = true
 
-	return &Model{
+	return Model{
 		ti:             ti,
 		result:         "",
 		history:        history,
@@ -83,12 +83,18 @@ func (m Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 		case tea.KeyUp:
 			// handles history navigation backwards for calculator mode
 			if m.mode == calculatorMode {
-				return m.nextHistoryRecord()
+				return m.previousHistoryRecord()
 			}
 		case tea.KeyDown:
 			// handles history navigation forwards for calculator mode
 			if m.mode == calculatorMode {
-				return m.prevHistoryRecord()
+				return m.nextHistoryRecord()
+			}
+		case tea.KeyTab:
+			// handles history placeholder suggestions for calculator mode
+			if m.mode == calculatorMode && m.ti.Value() == "" && m.ti.Placeholder != "" {
+				m.ti.SetValue(m.ti.Placeholder)
+				return m, nil
 			}
 		// handles finalized text input
 		case tea.KeyEnter:
@@ -100,7 +106,6 @@ func (m Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 	switch m.mode {
 	case calculatorMode:
 		m.ti, cmd = m.ti.Update(msg)
-		m.historyPointer = len(m.history.Items()) - 1
 	case cmdMode:
 		m.ti, cmd = m.ti.Update(msg)
 	case historyMode:
@@ -122,29 +127,41 @@ func (m Model) View() string {
 	}
 }
 
-func (m Model) nextHistoryRecord() (Model, tea.Cmd) {
+func (m Model) previousHistoryRecord() (Model, tea.Cmd) {
 	if len(m.history.Items()) == 0 {
 		return m, nil
 	}
-	if m.historyPointer < 0 {
+	if m.historyPointer == len(m.history.Items())-1 {
 		return m, nil
 	}
-
-	m.ti.SetValue(m.history.Items()[m.historyPointer].(historyRecord).input)
-	m.historyPointer--
-	return m, nil
-}
-
-func (m Model) prevHistoryRecord() (Model, tea.Cmd) {
-	if len(m.history.Items()) == 0 {
-		return m, nil
-	}
-	if m.historyPointer >= len(m.history.Items())-1 {
+	// if the user is typing something, we don't want to navigate through the history
+	if m.ti.Value() != "" {
+		m.historyPointer = -1
 		return m, nil
 	}
 
 	m.historyPointer++
-	m.ti.SetValue(m.history.Items()[m.historyPointer].(historyRecord).input)
+	m.ti.Placeholder = m.history.Items()[m.historyPointer].(historyRecord).input
+	m.ti.SetValue("")
+	return m, nil
+}
+
+func (m Model) nextHistoryRecord() (Model, tea.Cmd) {
+	if len(m.history.Items()) == 0 {
+		return m, nil
+	}
+	if m.historyPointer <= 0 {
+		return m, nil
+	}
+	// if the user is typing something, we don't want to navigate through the history
+	if m.ti.Value() != "" {
+		m.historyPointer = -1
+		return m, nil
+	}
+
+	m.historyPointer--
+	m.ti.Placeholder = m.history.Items()[m.historyPointer].(historyRecord).input
+	m.ti.SetValue("")
 	return m, nil
 }
 
@@ -155,12 +172,7 @@ func (m Model) processInput() (Model, tea.Cmd) {
 	case cmdMode:
 		return m.processCmdModeInput(m.ti.Value())
 	case historyMode:
-		hr := m.history.SelectedItem().(historyRecord)
-		m.err = nil
-		m.ti.SetValue(hr.input)
-		m.result = ""
-		m.mode = calculatorMode
-		return m, nil
+		return m.processHistoryModeInput()
 	default:
 		return m, nil
 	}
@@ -182,8 +194,17 @@ func (m Model) processCalculatorModeInput(input string) (Model, tea.Cmd) {
 	m.result = m.processCalcResult(*res)
 	// adding the new calculation to the history
 	m.history.InsertItem(0, historyRecord{input: input, result: m.result})
-	m.historyPointer = len(m.history.Items()) - 1
+	m.historyPointer = -1
 
+	return m, nil
+}
+
+func (m Model) processHistoryModeInput() (Model, tea.Cmd) {
+	hr := m.history.SelectedItem().(historyRecord)
+	m.err = nil
+	m.ti.SetValue(hr.input)
+	m.result = ""
+	m.mode = calculatorMode
 	return m, nil
 }
 
@@ -216,6 +237,7 @@ func (m Model) processCmdModeInput(input string) (Model, tea.Cmd) {
 		return m, nil
 	case calculatorCmdToken:
 		m.mode = calculatorMode
+		m.historyPointer = -1
 		m.err = nil
 		m.ti.SetValue("")
 		return m, nil

@@ -47,7 +47,7 @@ The result of the previous calculation is stored in the variable '$pr'
 and can be used in subsequent calculations.
 
 Have fun =)`,
-	Version: "0.0.5",
+	Version: "0.0.6",
 	Run: func(cmd *cobra.Command, args []string) {
 		p := tea.NewProgram(
 			tui.InitialModel(calc.NewCalcProcessor()),
